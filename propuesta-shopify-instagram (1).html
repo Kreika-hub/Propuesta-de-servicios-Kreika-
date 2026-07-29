@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kreika — Ecosistema Shopify × Instagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   KREIKA SWISS DESIGN SYSTEM TOKENS (ROUNDED)
+   ───────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --color-accent: #C50022;                /* Swiss Strong Red */
+  --color-accent-hover: #A3001C;
+  --color-accent-subtle: #FFF0F2;         /* Accent backdrop pink */
+  --color-bg-base: #FAFAFA;               /* Off-white page base */
+  --color-bg-card: #FFFFFF;               /* Solid pure white */
+  --color-bg-dark: #0A0A0A;               /* Deep Noir */
+  --color-text-dark: #0A0A0A;
+  --color-text-light: #F5F5F5;
+  --color-text-muted: #666666;
+  --color-border: #E5E5E5;
+  --color-border-dark: #222222;
+
+  /* Fonts */
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: 'Inter', Arial, sans-serif;
+  --font-display: 'Oswald', sans-serif;
+
+  /* Spacing */
+  --spacing-4: 4px; --spacing-8: 8px; --spacing-12: 12px;
+  --spacing-16: 16px; --spacing-20: 20px; --spacing-24: 24px;
+  --spacing-32: 32px; --spacing-48: 48px; --spacing-64: 64px;
+  --spacing-80: 80px; --spacing-120: 120px; --spacing-160: 160px;
+
+  /* Radius (Rounded as requested) */
+  --radius-pill: 999px;
+  --radius-tags: 8px;
+  --radius-cards: 24px;
+  --radius-buttons: 12px;
+  --radius-nav: 20px;
+
+  /* Shadows */
+  --shadow-card: 0 10px 40px rgba(10,10,10,0.03);
+  --shadow-nav: 0 4px 30px rgba(10,10,10,0.02);
+  --shadow-dropdown: 0 4px 30px rgba(10,10,10,0.05);
+
+  /* Motion */
+  --dur-ui: 350ms;
+  --ease-ui: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Reset ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{
+  background:var(--color-bg-base);
+  color:var(--color-text-dark);
+  font-family:var(--font-sans);
+  font-size:16px;
+  font-weight:400;
+  line-height:1.5;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;height:auto;}
+
+/* ─────────────────────────────────────────────
+   LAYOUT UTILITIES
+   ───────────────────────────────────────────── */
+.wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 var(--spacing-32);
+}
+@media(max-width:767px){.wrap{padding:0 var(--spacing-20);}}
+
+.eyebrow{
+  display:inline-block;
+  font-family:var(--font-mono);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  margin-bottom:var(--spacing-16);
+}
+
+/* ─────────────────────────────────────────────
+   NAVIGATION
+   ───────────────────────────────────────────── */
+nav{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:100;
+  width:calc(100% - 40px);
+  max-width:1060px;
+  background:rgba(255, 255, 255, 0.85);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-radius:var(--radius-nav);
+  box-shadow:var(--shadow-nav);
+  border:1px solid rgba(10,10,10,0.05);
+  padding:12px var(--spacing-24);
+}
+nav .wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+}
+.brand .chip{
+  width:32px;height:32px;
+  background:var(--color-accent);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform var(--dur-ui) var(--ease-ui);
+}
+.brand:hover .chip{
+  transform:rotate(-10deg) scale(1.05);
+}
+.brand .chip svg{width:16px;height:16px;}
+.brand .word{
+  font-family:var(--font-display);
+  font-size:20px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:var(--color-text-dark);
+}
+.navlinks{
+  display:flex;gap:24px;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-muted);
+}
+.navlinks a{transition:color var(--dur-ui);}
+.navlinks a:hover{color:var(--color-accent);}
+@media(max-width:767px){.navlinks{display:none;}}
+
+/* ─────────────────────────────────────────────
+   HERO
+   ───────────────────────────────────────────── */
+.hero{
+  padding:140px 0 var(--spacing-80);
+  background:var(--color-bg-base);
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.2fr 0.8fr;
+  gap:var(--spacing-64);
+  align-items:center;
+}
+@media(max-width:991px){
+  .hero-grid{grid-template-columns:1fr;gap:var(--spacing-48);}
+}
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(36px,6vw,56px);
+  font-weight:700;
+  line-height:0.95;
+  text-transform:uppercase;
+  color:var(--color-text-dark);
+  margin:var(--spacing-12) 0 var(--spacing-24);
+  letter-spacing: -1px;
+}
+.hero h1 em{
+  font-style:normal;
+  color:var(--color-accent);
+}
+.hero p.lede{
+  font-size:17px;
+  color:var(--color-text-muted);
+  line-height:1.6;
+  max-width:54ch;
+}
+
+/* Swiss Price Tag */
+.tag-wrap{
+  display:flex;justify-content:center;
+  animation:swing 6s ease-in-out infinite;
+  transform-origin:top center;
+}
+.tag{
+  background:var(--color-bg-dark);
+  color:#FFFFFF;
+  border-radius:var(--radius-cards);
+  padding:var(--spacing-32);
+  width:100%;
+  max-width:320px;
+  border:2px solid var(--color-accent);
+  box-shadow: 0 20px 48px rgba(197, 0, 34, 0.15);
+  position:relative;
+}
+.tag::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 14px;
+  height: 14px;
+  background: var(--color-bg-base);
+  border-radius: 50%;
+  border: 3px solid var(--color-accent);
+}
+@keyframes swing{
+  0%,100%{transform:rotate(2deg);}
+  50%{transform:rotate(-2deg);}
+}
+.tag .k{
+  font-family:var(--font-mono);
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  margin-bottom:12px;
+}
+.price-tiers{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:var(--spacing-16) 0 var(--spacing-8);
+}
+.price-tier{text-align:left;}
+.tier-label{
+  font-family:var(--font-mono);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:#AAAAAA;
+  margin-bottom:4px;
+}
+.tier-price{
+  font-family:var(--font-display);
+  font-size:38px;
+  font-weight:700;
+  line-height:1;
+  color:#FFFFFF;
+}
+.tier-price sup{
+  font-size:18px;
+  position:relative;
+  top:-10px;
+}
+.tier-arrow{
+  color:var(--color-accent);
+  font-size:24px;
+  font-weight:bold;
+  padding:0 var(--spacing-12);
+}
+.tag .terms{
+  font-family:var(--font-mono);
+  font-size:10px;
+  color:rgba(255,255,255,0.6);
+  line-height:1.6;
+  margin-top:var(--spacing-20);
+  border-top:1px dashed var(--color-border-dark);
+  padding-top:var(--spacing-16);
+}
+
+/* ─────────────────────────────────────────────
+   SECTIONS GENERAL
+   ───────────────────────────────────────────── */
+section{
+  padding:var(--spacing-120) 0;
+  border-top:1px solid var(--color-border);
+}
+.on-red{
+  background:var(--color-accent);
+  color:#FFFFFF;
+  border-top:none;
+}
+
+.chapter-head{
+  display:flex;align-items:center;gap:var(--spacing-16);
+  margin-bottom:var(--spacing-16);
+  flex-wrap:wrap;
+}
+.chapter-num{
+  font-family:var(--font-mono);
+  font-size:12px;
+  font-weight:600;
+  color:var(--color-accent);
+}
+.on-red .chapter-num{color:#FFFFFF;opacity:0.8;}
+.chapter-head h2{
+  font-family:var(--font-display);
+  font-size:clamp(28px,5vw,42px);
+  font-weight:700;
+  text-transform:uppercase;
+  line-height:1;
+  margin:0;
+  letter-spacing: -0.5px;
+}
+.kicker{
+  font-size:16px;
+  color:var(--color-text-muted);
+  max-width:64ch;
+  line-height:1.65;
+  margin-bottom:var(--spacing-48);
+}
+.on-red .kicker{color:rgba(255,255,255,0.85);}
+
+/* Icons & visuals */
+.chapter-icon{display:inline-flex;color:var(--color-accent);flex-shrink:0;}
+.chapter-icon svg{width:28px;height:28px;stroke:currentColor;fill:none;}
+.on-red .chapter-icon{color:#FFFFFF;}
+.card-icon{display:inline-flex;color:var(--color-accent);margin-bottom:var(--spacing-16);}
+.card-icon svg{width:28px;height:28px;}
+.ig-heart{display:inline-flex;color:var(--color-accent);animation:heartPop 2.4s ease-in-out infinite;margin-left:4px;vertical-align:middle;}
+.ig-heart svg{width:22px;height:22px;}
+@keyframes heartPop{0%,60%,100%{transform:scale(1);}70%{transform:scale(1.3);}80%{transform:scale(0.95);}90%{transform:scale(1.05);}}
+
+.gift-icon{display:inline-flex;vertical-align:middle;margin-left:10px;}
+.gift-icon svg{width:44px;height:44px;}
+.gift-lid{transform-origin:32px 28px;animation:lidOpen 3.5s ease-in-out infinite;}
+@keyframes lidOpen{
+  0%,15%{transform:rotate(0deg);}
+  30%,60%{transform:rotate(-18deg) translate(-2px,-2px);}
+  75%,100%{transform:rotate(0deg);}
+}
+
+/* Shopify cart animator */
+.cart-track{
+  position:relative;height:2px;background:var(--color-border);
+  overflow:visible;margin:var(--spacing-24) 0 var(--spacing-48);
+}
+.cart-icon-move{position:absolute;left:-40px;top:-12px;color:var(--color-accent);animation:cartMove 7s linear infinite;}
+.cart-icon-move svg{width:24px;height:24px;}
+@keyframes cartMove{0%{left:-40px;}100%{left:100%;}}
+
+/* ─────────────────────────────────────────────
+   WELCOME / REGALO SECTION (Two Columns with Photo)
+   ───────────────────────────────────────────── */
+#regalo{
+  background:var(--color-bg-base);
+}
+.welcome-grid{
+  display:grid;
+  grid-template-columns:1.20fr 0.80fr;
+  gap:var(--spacing-64);
+  align-items:start;
+}
+@media(max-width:991px){
+  .welcome-grid{grid-template-columns:1fr;gap:var(--spacing-48);}
+}
+
+.gift-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--spacing-16);
+  margin-bottom:var(--spacing-32);
+}
+.gift-card{
+  background:var(--color-bg-card);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-cards);
+  padding:var(--spacing-32);
+  transition:all var(--dur-ui) var(--ease-ui);
+}
+.gift-card:hover{
+  border-color:var(--color-accent);
+  box-shadow:var(--shadow-card);
+}
+.gift-card .num{
+  font-family:var(--font-mono);
+  font-size:11px;
+  font-weight:600;
+  color:var(--color-accent);
+  margin-bottom:8px;
+}
+.gift-card h3{
+  font-family:var(--font-display);
+  font-size:20px;
+  font-weight:700;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.gift-card p{
+  font-size:14px;
+  color:var(--color-text-muted);
+}
+.gift-flag{
+  display:inline-flex;
+  font-family:var(--font-mono);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  background:var(--color-accent-subtle);
+  border:1px solid rgba(197, 0, 34, 0.15);
+  padding:8px 16px;
+  border-radius:var(--radius-pill);
+}
+
+/* Offset Frame style for about model photo */
+.welcome-photo-container{
+  position:relative;
+  display:flex;
+  justify-content:center;
+  margin-top:var(--spacing-32);
+}
+.welcome-photo-offset{
+  position:relative;
+  width:100%;
+  max-width:340px;
+  aspect-ratio:3/4;
+  background:var(--color-accent);
+  border-radius:var(--radius-cards);
+}
+.welcome-photo-offset img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:var(--radius-cards);
+  border:1px solid var(--color-border);
+  background:var(--color-bg-card);
+  transform:translate(-12px, -12px);
+  transition: transform var(--dur-ui) var(--ease-ui);
+}
+.welcome-photo-container:hover .welcome-photo-offset img{
+  transform:translate(-6px, -6px);
+}
+
+/* ─────────────────────────────────────────────
+   SHOPIFY SECTION (Interactive steps tab list)
+   ───────────────────────────────────────────── */
+.toggle{
+  display:inline-flex;
+  background:rgba(10,10,10,0.03);
+  padding:6px;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--color-border);
+  margin-bottom:var(--spacing-32);
+}
+.toggle button{
+  border:none;
+  background:transparent;
+  padding:10px 20px;
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  font-weight:600;
+  border-radius:var(--radius-pill);
+  cursor:pointer;
+  transition:all var(--dur-ui);
+  color:var(--color-text-muted);
+}
+.toggle button.active{
+  background:var(--color-bg-dark);
+  color:#FFFFFF;
+}
+.task-list{display:none;flex-direction:column;gap:var(--spacing-16);}
+.task-list.active{display:flex;}
+.task{
+  display:flex;
+  gap:var(--spacing-20);
+  background:var(--color-bg-card);
+  border:1px solid var(--color-border);
+  padding:var(--spacing-32);
+  border-radius:var(--radius-cards);
+  transition:all var(--dur-ui);
+}
+.task:hover{
+  border-color:var(--color-accent);
+  box-shadow:var(--shadow-card);
+}
+.task .n{
+  font-family:var(--font-mono);
+  font-size:12px;
+  font-weight:600;
+  color:var(--color-accent);
+  margin-top:2px;
+}
+.task h4{
+  font-family:var(--font-display);
+  font-size:18px;
+  font-weight:700;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.task p{
+  font-size:14px;
+  color:var(--color-text-muted);
+}
+
+/* ─────────────────────────────────────────────
+   INSTAGRAM SECTION (Bold metric cards)
+   ───────────────────────────────────────────── */
+.ig-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--spacing-32);
+}
+@media(max-width:767px){
+  .ig-grid{grid-template-columns:1fr;gap:var(--spacing-20);}
+}
+.ig-card{
+  background:var(--color-bg-card);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-cards);
+  padding:var(--spacing-40) var(--spacing-32);
+  transition:all var(--dur-ui) var(--ease-ui);
+}
+.ig-card:hover{
+  border-color:var(--color-accent);
+  box-shadow:var(--shadow-card);
+  transform:translateY(-8px);
+}
+.ig-card .stat{
+  font-family:var(--font-display);
+  font-size:52px;
+  line-height:1;
+  font-weight:700;
+  color:var(--color-accent);
+  margin-bottom:12px;
+}
+.ig-card h4{
+  font-family:var(--font-display);
+  font-size:18px;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.ig-card p{
+  font-size:13.5px;
+  color:var(--color-text-muted);
+}
+
+/* ─────────────────────────────────────────────
+   ECOSISTEMA SECTION (Deep Black background node flow)
+   ───────────────────────────────────────────── */
+.flow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--spacing-12);
+  margin:var(--spacing-32) 0 var(--spacing-64);
+  flex-wrap:wrap;
+}
+.flow-node{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:18px;
+  padding:var(--spacing-24);
+  flex:1;
+  min-width:180px;
+  font-size:13px;
+  color:rgba(255,255,255,0.8);
+}
+.flow-node b{
+  display:block;
+  font-family:var(--font-display);
+  font-size:16px;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  margin-bottom:8px;
+}
+.flow-arrow{
+  color:rgba(255,255,255,0.25);
+  display:flex;justify-content:center;
+}
+@media(max-width:991px){
+  .flow{flex-direction:column;align-items:stretch;}
+  .flow-arrow{transform:rotate(90deg);padding:var(--spacing-12) 0;}
+}
+
+.auto-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--spacing-32);
+}
+@media(max-width:767px){
+  .auto-grid{grid-template-columns:1fr;gap:var(--spacing-20);}
+}
+.auto-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius-cards);
+  padding:var(--spacing-32);
+}
+.auto-card i{
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  font-style:normal;
+  display:block;
+  margin-bottom:12px;
+}
+.auto-card h4{
+  font-family:var(--font-display);
+  font-size:18px;
+  text-transform:uppercase;
+  color:#FFFFFF;
+  margin-bottom:10px;
+}
+.auto-card p{
+  font-size:13px;
+  color:rgba(255,255,255,0.7);
+}
+
+/* ─────────────────────────────────────────────
+   ACCOORDION / TERMINOS SECTION
+   ───────────────────────────────────────────── */
+.acc-item{
+  border-bottom:1px solid var(--color-border);
+}
+.acc-item:first-child{border-top:1px solid var(--color-border);}
+.acc-trigger{
+  width:100%;
+  background:none;
+  border:none;
+  text-align:left;
+  font-family:var(--font-display);
+  font-size:20px;
+  text-transform:uppercase;
+  color:var(--color-text-dark);
+  font-weight:700;
+  padding:var(--spacing-24) 0;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.acc-trigger .plus{
+  font-size:24px;
+  color:var(--color-accent);
+  transition:transform var(--dur-ui);
+}
+.acc-item.open .plus{
+  transform:rotate(45deg);
+}
+.acc-panel{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height var(--dur-ui) var(--ease-ui);
+}
+.acc-panel p{
+  font-size:14.5px;
+  color:var(--color-text-muted);
+  line-height:1.65;
+  padding-bottom:var(--spacing-24);
+  max-width:70ch;
+}
+
+/* ─────────────────────────────────────────────
+   CLOSING SECTION & FOOTER
+   ───────────────────────────────────────────── */
+.closing{
+  text-align:center;
+  background:var(--color-bg-base);
+}
+.closing h2{
+  font-family:var(--font-display);
+  font-size:clamp(32px,5vw,52px);
+  font-weight:700;
+  text-transform:uppercase;
+  line-height:1.05;
+  margin:var(--spacing-16) 0 var(--spacing-24);
+  letter-spacing: -0.5px;
+}
+.closing p{
+  color:var(--color-text-muted);
+  max-width:54ch;
+  margin:0 auto var(--spacing-48);
+}
+.recap{
+  display:inline-flex;
+  gap:var(--spacing-48);
+  border:1px solid var(--color-border);
+  background:var(--color-bg-card);
+  padding:var(--spacing-32) var(--spacing-48);
+  border-radius:var(--radius-cards);
+  margin-bottom:var(--spacing-48);
+  flex-wrap:wrap;
+  justify-content:center;
+  box-shadow:var(--shadow-card);
+}
+.recap div{text-align:left;}
+.recap .k{
+  font-family:var(--font-mono);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--color-accent);
+}
+.recap .v{
+  font-family:var(--font-display);
+  font-size:26px;
+  font-weight:700;
+  margin-top:6px;
+}
+
+/* WhatsApp Conversion Button */
+.wa-cta-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--spacing-12);
+}
+.wa-cta-label{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--color-text-muted);
+}
+.wa-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg, #25D366 0%, #1ebe5d 100%);
+  color:#FFFFFF;
+  font-size:16px;font-weight:700;
+  padding:16px 36px;
+  border-radius:var(--radius-pill);
+  box-shadow:0 8px 30px rgba(37,211,102,0.3);
+  transition:all var(--dur-ui) var(--ease-ui);
+  position:relative;
+}
+.wa-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 40px rgba(37,211,102,0.45);
+}
+.wa-icon{
+  display:flex;
+  animation:waPulse 2s ease-in-out infinite;
+}
+.wa-icon svg{width:24px;height:24px;}
+@keyframes waPulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.15);}
+}
+.wa-bubble{
+  width:6px;height:6px;border-radius:50%;
+  background:#FFFFFF;
+  animation:waBounce 1.4s ease-in-out infinite;
+  display:inline-block;
+  margin-left:2px;
+}
+.wa-bubble:nth-child(2){animation-delay:0.2s;}
+.wa-bubble:nth-child(3){animation-delay:0.4s;}
+@keyframes waBounce{
+  0%,80%,100%{transform:translateY(0);}
+  40%{transform:translateY(-4px);}
+}
+
+footer{
+  padding:var(--spacing-32) 0;
+  background:var(--color-bg-dark);
+  color:rgba(255,255,255,0.6);
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  border-top:1px solid var(--color-border-dark);
+}
+footer .wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:var(--spacing-16);
+}
+@media(max-width:767px){
+  footer .wrap{flex-direction:column;text-align:center;}
+}
+
+/* Animations reveal */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 0.7s var(--ease-ui), transform 0.7s var(--ease-ui);
+}
+.reveal.show{opacity:1;transform:translateY(0);}
+
+.split{display:inline-block;opacity:0;transform:translateY(10px);transition:all 0.5s var(--ease-ui);}
+.reveal.show .split{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- ─── Navigation ─── -->
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <div class="chip" style="overflow:hidden;padding:2px;">
+        <img src="logo_antorcha blanco .svg" alt="Kreika Antorcha" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+      </div>
+      <img src="logo_kreika logotipo negro.svg" alt="Kreika" style="height:28px;width:auto;display:block;">
+    </div>
+    <div class="navlinks">
+      <a href="index.html">← Inicio</a>
+      <a href="#regalo">Bienvenida</a>
+      <a href="#shopify">Shopify</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#ecosistema">Ecosistema</a>
+      <a href="#terminos">Términos</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── Hero ─── -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Propuesta de crecimiento digital · end-to-end</span>
+      <h1>Tu tienda y tu Instagram, <em>trabajando como uno solo.</em></h1>
+      <p class="lede">Construimos tu tienda en Shopify, la conectamos a un Instagram que vende, y sincronizamos todo con un asistente de IA que atiende a tus clientes 24 horas al día. Sin partes sueltas.</p>
+    </div>
+    <div class="tag-wrap">
+      <div>
+        <div class="tag">
+          <div class="k">Inversión mensual · USD</div>
+          <div class="price-tiers">
+            <div class="price-tier">
+              <div class="tier-label">Mes 1</div>
+              <div class="tier-price"><sup>$</sup>450</div>
+            </div>
+            <div class="tier-arrow">→</div>
+            <div class="price-tier">
+              <div class="tier-label">Desde mes 2</div>
+              <div class="tier-price"><sup>$</sup>380</div>
+            </div>
+          </div>
+          <div class="terms">Compromiso mínimo · 6 meses<br>Inscripción · $0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── Regalo de bienvenida (Welcome section with B&W editorial portrait) ─── -->
+<section id="regalo">
+  <div class="wrap welcome-grid">
+    <div class="reveal">
+      <div class="chapter-head">
+        <span class="chapter-num">00</span>
+        <h2>Regalo de bienvenida</h2>
+        <span class="gift-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <rect x="10" y="28" width="44" height="28" rx="6" fill="#C50022" stroke="#000000" stroke-width="1.8"/>
+            <rect x="10" y="28" width="44" height="7" fill="#000000"/>
+            <rect x="28.5" y="28" width="7" height="28" fill="#000000"/>
+            <g class="gift-lid">
+              <rect x="6" y="18" width="52" height="12" rx="4" fill="#0A0A0A" stroke="#C50022" stroke-width="1.8"/>
+              <path d="M32 18 C 24 6, 12 8, 18 16 C 22 20, 28 19, 32 18Z" fill="#C50022"/>
+              <path d="M32 18 C 40 6, 52 8, 46 16 C 42 20, 36 19, 32 18Z" fill="#C50022"/>
+            </g>
+            <path class="gift-sparkle" d="M32 2l1.6 5.4L39 9l-5.4 1.6L32 16l-1.6-5.4L25 9l5.4-1.6L32 2z" fill="#C50022"/>
+          </svg>
+        </span>
+      </div>
+      <p class="kicker">Antes de vender un solo producto, tu marca necesita verse como tal. Por eso el Mes 1 incluye tu identidad visual completa, sin costo adicional — un trabajo que cualquier agencia facturaría aparte por encima de los $1.200 USD.</p>
+
+      <div class="gift-grid">
+        <div class="gift-card">
+          <div class="num">01</div>
+          <h3>Renovación de logotipo</h3>
+          <p>Adaptación moderna y legible, optimizada para ícono de perfil de Instagram y cabecera web.</p>
+        </div>
+        <div class="gift-card">
+          <div class="num">02</div>
+          <h3>Brand board oficial</h3>
+          <p>Paleta de colores y tipografías corporativas, para que web y redes luzcan como una sola marca.</p>
+        </div>
+        <div class="gift-card">
+          <div class="num">03</div>
+          <h3>Buyer persona</h3>
+          <p>Perfil de tu comprador ideal: cómo hablarle, qué contenido consume y cómo convertirlo en venta.</p>
+        </div>
+      </div>
+      <span class="gift-flag">Incluido en el mes 1 · $0</span>
+    </div>
+
+    <!-- Editorial image next to gift items -->
+    <div class="welcome-photo-container">
+      <div class="welcome-photo-offset">
+        <img src="nosotras.jpeg" alt="Equipo Kreika">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Shopify ─── -->
+<section id="shopify">
+  <div class="wrap reveal">
+    <div class="chapter-head">
+      <span class="chapter-num">01</span>
+      <h2>Shopify — la tienda que no descansa</h2>
+      <span class="chapter-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 8h12l-1 12H7L6 8z"/>
+          <path d="M9 8V6a3 3 0 016 0v2"/>
+        </svg>
+      </span>
+    </div>
+    <p class="kicker">Nos encargamos de la parte técnica por completo: construimos tu tienda de ropa desde cero y la mantenemos viva, mes tras mes.</p>
+
+    <!-- Cart track animation -->
+    <div class="cart-track" aria-hidden="true">
+      <div class="cart-icon-move">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="20" r="1.5" fill="currentColor" stroke="none"/>
+          <circle cx="18" cy="20" r="1.5" fill="currentColor" stroke="none"/>
+          <path d="M2 3h2l2.5 12.5a2 2 0 002 1.5h8a2 2 0 002-1.8L21 8H6"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="toggle" role="tablist" aria-label="Fases del trabajo en Shopify">
+      <button class="active" onclick="showPhase('m1', this)">Mes 1 — Configuración</button>
+      <button onclick="showPhase('m2', this)">Mes 2 en adelante</button>
+    </div>
+
+    <div class="task-list active" id="m1">
+      <div class="task">
+        <div class="n">01</div>
+        <div>
+          <h4>Estructura base</h4>
+          <p>Configuración técnica de Shopify, pasarelas de pago (tarjetas, PayPal) y sistemas de envío locales e internacionales.</p>
+        </div>
+      </div>
+      <div class="task">
+        <div class="n">02</div>
+        <div>
+          <h4>Carga inicial de catálogo</h4>
+          <p>Subida optimizada de los primeros 200 productos, organizados por categorías y colecciones (nueva temporada, vestidos, accesorios).</p>
+        </div>
+      </div>
+      <div class="task">
+        <div class="n">03</div>
+        <div>
+          <h4>Estructura de variantes</h4>
+          <p>Configuración de tallas y colores para que el inventario sea preciso desde el primer día.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-list" id="m2">
+      <div class="task">
+        <div class="n">01</div>
+        <div>
+          <h4>Actualización de inventario</h4>
+          <p>Carga e indexación mensual de 70 productos nuevos, con fotos, precios y descripciones listas.</p>
+        </div>
+      </div>
+      <div class="task">
+        <div class="n">02</div>
+        <div>
+          <h4>Colecciones inteligentes</h4>
+          <p>Cada prenda nueva se asigna sola a su colección correspondiente mediante etiquetas automatizadas.</p>
+        </div>
+      </div>
+      <div class="task">
+        <div class="n">03</div>
+        <div>
+          <h4>Optimización estacional</h4>
+          <p>Cambio de banners de portada para rebajas, lanzamientos o promociones especiales del mes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Instagram ─── -->
+<section id="instagram">
+  <div class="wrap reveal">
+    <div class="chapter-head">
+      <span class="chapter-num">02</span>
+      <h2>Instagram — el motor de tracción</h2>
+      <span class="chapter-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z"/>
+          <circle cx="12" cy="13" r="3"/>
+        </svg>
+      </span>
+      <span class="ig-heart" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 21s-7-4.35-9.5-8.8C.5 8.5 2 5 5.5 5c2 0 3.3 1.1 4 2.2C10.2 6.1 11.5 5 13.5 5 17 5 18.5 8.5 21.5 12.2 19 16.65 12 21 12 21z"/>
+        </svg>
+      </span>
+    </div>
+    <p class="kicker">Convertimos tu perfil en el escaparate principal que empuja tráfico y ventas directo hacia tu tienda.</p>
+
+    <div class="ig-grid">
+      <div class="ig-card">
+        <p class="stat">12–15</p>
+        <h4>Publicaciones al mes</h4>
+        <p>3 por semana entre reels, carruseles y posts enfocados en looks, outfits, tendencias y detalles de tela.</p>
+      </div>
+      <div class="ig-card">
+        <p class="stat">3–5</p>
+        <h4>Historias por semana</h4>
+        <p>Contenido dinámico con encuestas, dinámicas de interacción y stickers de enlace directo a producto.</p>
+      </div>
+      <div class="ig-card">
+        <p class="stat">100%</p>
+        <h4>Catálogo en tiempo real</h4>
+        <p>Instagram Shopping vinculado a Shopify: tus seguidores tocan la prenda y ven precio y stock al instante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Ecosistema ─── -->
+<section id="ecosistema" class="on-red">
+  <div class="wrap reveal">
+    <div class="chapter-head">
+      <span class="chapter-num">03</span>
+      <h2>
+        <span class="split" style="transition-delay:.04s">El</span>
+        <span class="split" style="transition-delay:.1s">ecosistema</span>
+        —
+        <span class="split" style="transition-delay:.2s">sincronía</span>
+        <span class="split" style="transition-delay:.27s">e</span>
+        <span class="split" style="transition-delay:.34s">inteligencia</span>
+        <span class="split" style="transition-delay:.41s">artificial</span>
+      </h2>
+      <span class="chapter-icon sparkle-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/>
+        </svg>
+      </span>
+    </div>
+    <p class="kicker">Shopify e Instagram no son dos frentes separados: son un solo engranaje.</p>
+
+    <div class="flow">
+      <div class="flow-node">
+        <b>Tú envías</b>
+        fotos y datos de los 70 productos del mes
+      </div>
+      <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+      <div class="flow-node">
+        <b>Se sube</b>
+        a la tienda Shopify, editado y con copy listo
+      </div>
+      <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+      <div class="flow-node">
+        <b>Se programa</b>
+        el contenido de Instagram en paralelo
+      </div>
+      <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+      <div class="flow-node">
+        <b>Cero retrasos</b>
+        una campaña especial mensual acompaña el lanzamiento
+      </div>
+    </div>
+
+    <div class="auto-grid">
+      <div class="auto-card">
+        <i>Shopify Magic</i>
+        <h4>100 respuestas instantáneas</h4>
+        <p>El sistema sugiere respuestas automáticas basadas en tus políticas de envío y devoluciones, para que el cliente no espere.</p>
+      </div>
+      <div class="auto-card">
+        <i>Primer contacto</i>
+        <h4>Bienvenida automática</h4>
+        <p>Envío automático de un mensaje de bienvenida apenas el cliente abre el chat, para retener su atención desde el segundo uno.</p>
+      </div>
+      <div class="auto-card">
+        <i>Asistente IA</i>
+        <h4>Atención 24/7</h4>
+        <p>Una IA personalizada e integrada en tus canales, entrenada para guiar la compra, resolver dudas y cerrar ventas a toda hora.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Términos del acuerdo ─── -->
+<section id="terminos">
+  <div class="wrap reveal">
+    <div class="chapter-head">
+      <span class="chapter-num">04</span>
+      <h2>Términos del acuerdo</h2>
+      <span class="chapter-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="4" width="12" height="17" rx="2"/>
+          <path d="M9 3h6v3H9z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </span>
+    </div>
+    <p class="kicker">Para la tranquilidad de ambas partes, así queda repartido el trabajo.</p>
+
+    <div class="acc">
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">Qué aportas tú <span class="plus">+</span></button>
+        <div class="acc-panel">
+          <p>Fotografías en bruto de las prendas y los datos básicos de producto (precios, tallas). Nosotros editamos las imágenes, redactamos los copys y lo optimizamos todo.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">Fechas de entrega <span class="plus">+</span></button>
+        <div class="acc-panel">
+          <p>Los materiales de los 70 productos mensuales se entregan consolidados en los primeros días del mes, para una programación limpia en Instagram y Shopify.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">Costos externos <span class="plus">+</span></button>
+        <div class="acc-panel">
+          <p>La suscripción de Shopify (aprox. $39 USD/mes) y la compra del dominio corren por tu cuenta, aparte de la inversión mensual del servicio.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">Duración mínima — 6 meses <span class="plus">+</span></button>
+        <div class="acc-panel">
+          <p>El Mes 1 concentra una inversión de horas alta: logotipo, brand board, diseño web y carga de 200 productos iniciales, todo con inscripción en $0. El acuerdo de permanencia protege ese trabajo inicial.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Closing ─── -->
+<section class="closing">
+  <div class="wrap reveal">
+    <span class="eyebrow">Kreika × tu marca</span>
+    <h2>Un solo equipo para tu tienda y tus redes.</h2>
+    <p>Diseño, catálogo, contenido y atención al cliente moviéndose al mismo ritmo — sin que tengas que coordinar nada tú mismo.</p>
+
+    <div class="recap">
+      <div>
+        <div class="k">Inversión</div>
+        <div class="v">$450 <span style="font-size:16px;color:rgba(10,10,10,0.3);font-weight:500;">&rarr;</span> $380/mes</div>
+      </div>
+      <div>
+        <div class="k">Permanencia</div>
+        <div class="v">6 meses</div>
+      </div>
+      <div>
+        <div class="k">Inscripción</div>
+        <div class="v">$0</div>
+      </div>
+    </div>
+
+    <!-- WhatsApp CTA -->
+    <div class="wa-cta-wrap">
+      <span class="wa-cta-label">¿Te gusta? ¡Hablemos!</span>
+      <a id="wa-conversemos"
+         href="https://wa.me/584120770776?text=Hola%20Kreika%2C%20vi%20su%20propuesta%20y%20me%20interesa%20conversar%20%F0%9F%99%8C"
+         class="wa-btn"
+         target="_blank"
+         rel="noopener noreferrer">
+        <span class="wa-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 22c-1.85 0-3.66-.5-5.24-1.44l-.37-.22-3.87 1.02 1.03-3.78-.24-.39A9.94 9.94 0 0 1 2 12C2 6.48 6.48 2 12 2c2.67 0 5.18 1.04 7.07 2.93A9.93 9.93 0 0 1 22 12c0 5.52-4.48 10-10 10zm5.44-7.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01s-.52.07-.79.37c-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.1 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.89.12.58-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/>
+          </svg>
+        </span>
+        Conversemos
+        <span style="display:inline-flex;align-items:center;gap:3px;margin-left:4px;">
+          <span class="wa-bubble"></span>
+          <span class="wa-bubble"></span>
+          <span class="wa-bubble"></span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer>
+  <div class="wrap">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:24px;height:24px;border-radius:6px;overflow:hidden;padding:1px;background:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;">
+        <img src="logo_antorcha blanco .svg" alt="Kreika Antorcha" style="width:100%;height:100%;object-fit:cover;border-radius:5px;">
+      </div>
+      <img src="logo_kreika logotipo negro.svg" alt="Kreika" style="height:22px;width:auto;display:inline-block;filter:brightness(0) invert(1);">
+      <span style="margin-left:8px;">&mdash; Ecosistema Digital para marcas</span>
+    </div>
+    <span>Propuesta preparada para tu marca &mdash; 2025</span>
+  </div>
+</footer>
+
+<script>
+function showPhase(id, btn){
+  document.querySelectorAll('.toggle button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.task-list').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function toggleAcc(trigger){
+  const item = trigger.parentElement;
+  const panel = item.querySelector('.acc-panel');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.acc-item').forEach(i=>{
+    i.classList.remove('open');
+    i.querySelector('.acc-panel').style.maxHeight = null;
+  });
+  if(!isOpen){
+    item.classList.add('open');
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+  }
+}
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); } });
+}, {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
