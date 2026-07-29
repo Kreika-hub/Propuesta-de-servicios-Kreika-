@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kreika — Ecosistema Web + Autogestión + SEO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   KREIKA SWISS DESIGN SYSTEM TOKENS (ROUNDED)
+   ───────────────────────────────────────────── */
+:root {
+  --color-accent: #C50022;                /* Swiss Strong Red */
+  --color-accent-hover: #A3001C;
+  --color-accent-subtle: #FFF0F2;         /* Accent backdrop pink */
+  --color-bg-base: #FAFAFA;               /* Off-white page base */
+  --color-bg-card: #FFFFFF;               /* Solid pure white */
+  --color-bg-dark: #0A0A0A;               /* Deep Noir */
+  --color-text-dark: #0A0A0A;
+  --color-text-light: #F5F5F5;
+  --color-text-muted: #666666;
+  --color-border: #E5E5E5;
+  --color-border-dark: #222222;
+
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: 'Inter', Arial, sans-serif;
+  --font-display: 'Oswald', sans-serif;
+
+  --spacing-4: 4px; --spacing-8: 8px; --spacing-12: 12px;
+  --spacing-16: 16px; --spacing-20: 20px; --spacing-24: 24px;
+  --spacing-32: 32px; --spacing-48: 48px; --spacing-64: 64px;
+  --spacing-80: 80px; --spacing-120: 120px; --spacing-160: 160px;
+
+  --radius-pill: 999px;
+  --radius-tags: 8px;
+  --radius-cards: 24px;
+  --radius-buttons: 12px;
+  --radius-nav: 20px;
+
+  --shadow-card: 0 10px 40px rgba(10,10,10,0.03);
+  --shadow-nav: 0 4px 30px rgba(10,10,10,0.02);
+
+  --dur-ui: 350ms;
+  --ease-ui: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{
+  background:var(--color-bg-base);
+  color:var(--color-text-dark);
+  font-family:var(--font-sans);
+  font-size:15px;
+  font-weight:400;
+  line-height:1.6;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;height:auto;}
+
+.wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 var(--spacing-32);
+}
+@media(max-width:767px){.wrap{padding:0 var(--spacing-20);}}
+
+.eyebrow{
+  display:inline-block;
+  font-family:var(--font-mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  margin-bottom:var(--spacing-16);
+}
+
+/* NAVIGATION */
+nav{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:100;
+  width:calc(100% - 40px);
+  max-width:1060px;
+  background:rgba(255, 255, 255, 0.85);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-radius:var(--radius-nav);
+  box-shadow:var(--shadow-nav);
+  border:1px solid rgba(10,10,10,0.05);
+  padding:12px var(--spacing-24);
+}
+nav .wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+}
+.brand .chip{
+  width:32px;height:32px;
+  background:var(--color-accent);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform var(--dur-ui) var(--ease-ui);
+}
+.brand:hover .chip{
+  transform:rotate(-10deg) scale(1.05);
+}
+.brand .chip svg{width:16px;height:16px;}
+.brand .word{
+  font-family:var(--font-display);
+  font-size:20px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:var(--color-text-dark);
+}
+.navlinks{
+  display:flex;gap:24px;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-muted);
+}
+.navlinks a:hover{
+  color:var(--color-accent);
+}
+.nav-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-bg-base);
+  color: var(--color-text-dark);
+  margin-right: 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: all var(--dur-ui) var(--ease-ui);
+}
+.nav-back-button:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+.nav-back-button svg { width: 16px; height: 16px; }
+
+@media(max-width:767px){.navlinks{display:none;}}
+
+/* HERO */
+.hero{
+  padding:140px 0 var(--spacing-80);
+  background:var(--color-bg-base);
+  position: relative;
+}
+.hero-decoration {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.hero-decoration svg.dots-layer {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+}
+.dotted-line {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 6;
+  opacity: 0.2;
+  animation: moveDots 20s linear infinite;
+}
+@keyframes moveDots {
+  to { stroke-dashoffset: -400; }
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.2fr 0.8fr;
+  gap:var(--spacing-64);
+  align-items:center;
+  position: relative;
+  z-index: 2;
+}
+@media(max-width:991px){
+  .hero-grid{grid-template-columns:1fr;gap:var(--spacing-48);}
+  .hero-decoration{display:none;}
+}
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(36px,6vw,54px);
+  font-weight:700;
+  line-height:0.95;
+  text-transform:uppercase;
+  color:var(--color-text-dark);
+  margin:var(--spacing-12) 0 var(--spacing-24);
+  letter-spacing: -1px;
+}
+.hero h1 em{
+  font-style:normal;
+  color:var(--color-accent);
+}
+.hero p.lede{
+  font-size:16px;
+  color:var(--color-text-muted);
+  line-height:1.6;
+  max-width:54ch;
+}
+
+/* Swiss Price Tag */
+.tag-wrap{
+  position:relative;
+  display:inline-block;
+  width:100%;
+}
+.tag{
+  background:var(--color-bg-dark);
+  color:#FFFFFF;
+  border-radius:var(--radius-cards);
+  padding:var(--spacing-48) var(--spacing-32);
+  position:relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  animation: swing 6s ease-in-out infinite;
+  transform-origin: top center;
+  border: 3px solid var(--color-accent);
+}
+@keyframes swing{
+  0%,100%{transform:rotate(1.5deg);}
+  50%{transform:rotate(-1.5deg);}
+}
+.tag .k{
+  font-family:var(--font-mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  margin-bottom:12px;
+}
+.price-tiers{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:var(--spacing-16) 0 var(--spacing-8);
+}
+.price-tier{text-align:left;}
+.tier-label{
+  font-family:var(--font-mono);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:#AAAAAA;
+  margin-bottom:4px;
+}
+.tier-price{
+  font-family:var(--font-display);
+  font-size:38px;
+  font-weight:700;
+  line-height:1;
+  color:#FFFFFF;
+}
+.tier-price sup{
+  font-size:18px;
+  position:relative;
+  top:-10px;
+}
+.tier-arrow{
+  color:var(--color-accent);
+  font-size:24px;
+  font-weight:bold;
+  padding:0 var(--spacing-12);
+}
+.tag .terms{
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:rgba(255,255,255,0.6);
+  line-height:1.6;
+  margin-top:var(--spacing-20);
+  border-top:1px dashed var(--color-border-dark);
+  padding-top:var(--spacing-16);
+}
+
+/* SECTIONS GENERAL */
+section{
+  padding:var(--spacing-120) 0;
+  border-top:1px solid var(--color-border);
+}
+.on-red{
+  background:var(--color-accent);
+  color:#FFFFFF;
+  border-top:none;
+}
+.on-dark{
+  background:var(--color-bg-dark);
+  color:#FFFFFF;
+  border-top:none;
+}
+
+.sec-head{
+  margin-bottom:var(--spacing-64);
+  max-width:700px;
+}
+.sec-head h2{
+  font-family:var(--font-display);
+  font-size:clamp(32px,5vw,48px);
+  font-weight:700;
+  text-transform:uppercase;
+  line-height:1;
+  letter-spacing:-0.5px;
+  margin-top:var(--spacing-8);
+}
+.sec-head p{
+  font-size:16px;
+  color:var(--color-text-muted);
+  margin-top:var(--spacing-16);
+}
+.on-red .sec-head p, .on-dark .sec-head p{color:rgba(255,255,255,0.8);}
+
+/* BENTO GRID */
+.bento{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:var(--spacing-24);
+}
+@media(max-width:991px){
+  .bento{grid-template-columns:1fr;}
+}
+.bento-card{
+  background:var(--color-bg-card);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-cards);
+  padding:var(--spacing-48) var(--spacing-32);
+  position:relative;
+  overflow:hidden;
+  transition:all var(--dur-ui) var(--ease-ui);
+}
+.bento-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-card);
+}
+.bento-card.bg-accent{
+  background:var(--color-accent);
+  color:#FFFFFF;
+  border:none;
+}
+.bento-card.bg-dark{
+  background:var(--color-bg-dark);
+  color:#FFFFFF;
+  border:none;
+}
+.col-12{grid-column:span 12;}
+.col-8{grid-column:span 8;}
+.col-6{grid-column:span 6;}
+.col-4{grid-column:span 4;}
+
+@media(max-width:991px){
+  .col-8,.col-6,.col-4{grid-column:span 12;}
+}
+
+.bento-card i.num{
+  font-family:var(--font-mono);
+  font-size:11px;
+  font-style:normal;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  display:block;
+  margin-bottom:var(--spacing-16);
+}
+.bento-card.bg-accent i.num{color:rgba(255,255,255,0.7);}
+.bento-card h3{
+  font-family:var(--font-display);
+  font-size:24px;
+  font-weight:700;
+  text-transform:uppercase;
+  line-height:1.1;
+  margin-bottom:var(--spacing-12);
+}
+.bento-card p{
+  color:var(--color-text-muted);
+  font-size:14px;
+  line-height:1.6;
+}
+.bento-card.bg-accent p, .bento-card.bg-dark p{color:rgba(255,255,255,0.85);}
+
+/* Gift Welcome Banner (Chapter 00) */
+.gift-banner {
+  background: linear-gradient(135deg, #111111 0%, #1a0005 100%);
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-48);
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(197, 0, 34, 0.15);
+}
+.gift-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-accent);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--spacing-20);
+}
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-20);
+  margin-top: var(--spacing-32);
+}
+@media (max-width: 767px) {
+  .gift-grid { grid-template-columns: 1fr; }
+}
+.gift-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: var(--spacing-20);
+}
+.gift-item h4 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+}
+.gift-item p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* TOGGLES / TABS */
+.toggle{
+  display:inline-flex;
+  background:rgba(10,10,10,0.03);
+  padding:6px;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--color-border);
+  margin-bottom:var(--spacing-32);
+}
+.toggle button{
+  border:none;
+  background:transparent;
+  padding:10px 20px;
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  font-weight:600;
+  border-radius:var(--radius-pill);
+  cursor:pointer;
+  transition:all var(--dur-ui);
+  color:var(--color-text-muted);
+}
+.toggle button.active{
+  background:var(--color-bg-dark);
+  color:#FFFFFF;
+}
+
+/* METRICS / STATS CARDS */
+.stat-box{
+  background:var(--color-bg-base);
+  border:1px solid var(--color-border);
+  border-radius:16px;
+  padding:var(--spacing-24);
+  text-align:center;
+}
+.stat-num{
+  font-family:var(--font-display);
+  font-size:48px;
+  font-weight:700;
+  color:var(--color-accent);
+  line-height:1;
+}
+.stat-lbl{
+  font-family:var(--font-mono);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:var(--color-text-muted);
+  margin-top:8px;
+}
+
+/* FLOW NODES (Ecosistema) */
+.flow-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:var(--spacing-20);
+  margin-top:var(--spacing-48);
+}
+@media(max-width:767px){
+  .flow-grid{grid-template-columns:1fr;}
+}
+.flow-node{
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--color-border-dark);
+  border-radius:var(--radius-cards);
+  padding:var(--spacing-32);
+  position:relative;
+}
+.flow-node .step{
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:var(--color-accent);
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.flow-node h4{
+  font-family:var(--font-display);
+  font-size:20px;
+  text-transform:uppercase;
+  color:#FFFFFF;
+  margin-bottom:8px;
+}
+.flow-node p{
+  font-size:13px;
+  color:rgba(255,255,255,0.7);
+}
+
+/* ACCORDION (Términos) */
+.accordion{
+  display:flex;
+  flex-direction:column;
+  gap:var(--spacing-16);
+}
+.acc-item{
+  background:var(--color-bg-card);
+  border:1px solid var(--color-border);
+  border-radius:16px;
+  overflow:hidden;
+}
+.acc-header{
+  padding:var(--spacing-24) var(--spacing-32);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  font-family:var(--font-display);
+  font-size:18px;
+  text-transform:uppercase;
+  font-weight:700;
+  user-select:none;
+}
+.acc-icon{
+  width:24px;height:24px;
+  transition:transform var(--dur-ui);
+}
+.acc-item.open .acc-icon{transform:rotate(180deg);}
+.acc-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height var(--dur-ui) var(--ease-ui);
+  padding:0 var(--spacing-32);
+}
+.acc-item.open .acc-body{
+  padding:0 var(--spacing-32) var(--spacing-32);
+  max-height:500px;
+}
+.acc-body p{
+  font-size:14px;
+  color:var(--color-text-muted);
+  line-height:1.6;
+}
+
+/* FOOTER CTA & WATERMARK */
+.footer-cta{
+  padding:var(--spacing-120) 0 var(--spacing-64);
+  background:var(--color-accent);
+  color:#FFFFFF;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.footer-content{position:relative;z-index:1;}
+.footer-kicker{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.8);
+  margin-bottom:var(--spacing-20);
+}
+.footer-headline{
+  font-family:var(--font-display);
+  font-size:clamp(32px,6vw,64px);
+  font-weight:700;
+  text-transform:uppercase;
+  line-height:0.95;
+  color:#FFFFFF;
+  max-width:18ch;
+  margin:0 auto var(--spacing-48);
+}
+.footer-btns{
+  display:flex;align-items:center;justify-content:center;
+  gap:var(--spacing-16);
+  flex-wrap:wrap;
+}
+.btn-wa-green {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 36px;
+  border-radius: var(--radius-buttons);
+  box-shadow: 0 8px 30px rgba(37,211,102,0.3);
+  transition: all var(--dur-ui) var(--ease-ui);
+  text-decoration: none;
+}
+.btn-wa-green:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(37,211,102,0.45);
+  background: linear-gradient(135deg, #2cf476 0%, #20d569 100%);
+}
+.footer-cta-watermark {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-55%);
+  height: 100%;
+  max-height: 480px;
+  pointer-events: none;
+  opacity: 0.21;
+  z-index: 0;
+  animation: floatTorchWatermark 6s ease-in-out infinite;
+}
+.footer-cta-watermark img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+@keyframes floatTorchWatermark {
+  0%, 100% { transform: translateY(-55%) rotate(0deg); }
+  50% { transform: translateY(-57%) rotate(-3deg); }
+}
+@media (max-width: 767px) {
+  .footer-cta-watermark {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 70%;
+    opacity: 0.12;
+    animation: floatTorchWatermarkMobile 6s ease-in-out infinite;
+  }
+}
+@keyframes floatTorchWatermarkMobile {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  50% { transform: translate(-50%, -53%) rotate(-3deg); }
+}
+
+footer{
+  padding:var(--spacing-32) 0;
+  background:var(--color-bg-dark);
+  color:rgba(255,255,255,0.6);
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  border-top:1px solid var(--color-border-dark);
+}
+footer .wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:var(--spacing-16);
+}
+@media(max-width:767px){
+  footer .wrap{flex-direction:column;text-align:center;}
+}
+
+/* REVEAL ANIMATION */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="wrap">
+    <a href="landing.html" class="brand">
+      <div class="nav-back-button" title="Volver al inicio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </div>
+      <div class="chip">
+        <svg viewBox="0 0 16 16" fill="none">
+          <path d="M8 1v14M1 8h14" stroke="#FFF" stroke-width="2"/>
+        </svg>
+      </div>
+      <span class="word">Kreika</span>
+    </a>
+    <div class="navlinks">
+      <a href="#welcome">00 Marca</a>
+      <a href="#web">01 Web</a>
+      <a href="#redes">02 Redes</a>
+      <a href="#autogestion">03 Autogestión</a>
+      <a href="#seo">04 SEO</a>
+      <a href="#ecosistema">05 Ecosistema</a>
+      <a href="#terminos">06 Términos</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-decoration">
+    <svg class="dots-layer" xmlns="http://www.w3.org/2000/svg">
+      <path class="dotted-line" d="M -100 100 C 300 0, 600 300, 1400 100" />
+      <path class="dotted-line line-reverse" d="M -100 300 C 400 500, 800 100, 1400 400" />
+    </svg>
+  </div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Propuesta de Servicios — Ecosistema Digital</span>
+      <h1>Pasa de dueña de negocio a dueña de un <em>sistema</em> que trabaja para ti</h1>
+      <p class="lede">
+        Un ecosistema integral que combina tu Web profesional, reservas 24/7, gestión de equipo, contenidos continuos y posicionamiento SEO local. Todo configurado para que delegues con control y tu negocio escale de forma autónoma.
+      </p>
+    </div>
+
+    <div class="tag-wrap">
+      <div class="tag">
+        <div class="k">Ecosistema Web + Autogestión</div>
+        <div class="price-tiers">
+          <div class="price-tier">
+            <div class="tier-label">Mes 1 (Setup)</div>
+            <div class="tier-price"><sup>$</sup>450</div>
+          </div>
+          <div class="tier-arrow">→</div>
+          <div class="price-tier">
+            <div class="tier-label">Mes 2+</div>
+            <div class="tier-price"><sup>$</sup>350<span style="font-size:14px;font-weight:400;color:#AAA;">/mes</span></div>
+          </div>
+        </div>
+        <div class="terms">
+          ✓ Permanencia mínima: 6 meses<br>
+          ✓ Inscripción inicial: $0 sin costo extra<br>
+          ✓ Sistema visual & marca incluido en Mes 1
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- CHAPTER 00: REGALO DE BIENVENIDA -->
+<section id="welcome" class="reveal">
+  <div class="wrap">
+    <div class="gift-banner">
+      <div class="gift-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        Regalo Mes 1 — Incluido $0
+      </div>
+      <div class="sec-head" style="margin-bottom: var(--spacing-24);">
+        <span class="eyebrow" style="color:var(--color-accent);">00 · Sistema Visual & Marca</span>
+        <h2 style="color:#FFF;">Manual de Identidad Aplicada & Estilo</h2>
+        <p style="color:rgba(255,255,255,0.8);">
+          Como ya cuentas con logo y marca básica, durante el primer mes nos encargamos de estructurar y aplicar todo el universo gráfico sin costo adicional para dar consistencia y elegancia a cada canal.
+        </p>
+      </div>
+
+      <div class="gift-grid">
+        <div class="gift-item">
+          <h4>Mood Board</h4>
+          <p>Dirección estética y paleta cromática de apoyo para imágenes y plataforma.</p>
+        </div>
+        <div class="gift-item">
+          <h4>Tono de Comunicación</h4>
+          <p>Manual del estilo verbal, respuestas y personalidad para hablar con tus clientes.</p>
+        </div>
+        <div class="gift-item">
+          <h4>Buyer Persona</h4>
+          <p>Perfilamiento estratégico de tu cliente ideal para dirigir las ofertas exactas.</p>
+        </div>
+        <div class="gift-item">
+          <h4>Plantillas Gráficas</h4>
+          <p>Formatos editables para redes y web con la imagen uniforme de tu negocio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 01: WEB -->
+<section id="web" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">01 · Sitio Web Profesional</span>
+      <h2>Tu centro de operaciones 24/7</h2>
+      <p>Una página web moderna, veloz y optimizada para convertir visitantes en clientes agendados.</p>
+    </div>
+
+    <div class="toggle">
+      <button class="active" onclick="switchWebTab('mes1', this)">Mes 1: Desarrollo e Instalación</button>
+      <button onclick="switchWebTab('mes2', this)">Mes 2 en adelante: Mantenimiento & Evolución</button>
+    </div>
+
+    <div id="web-mes1" class="bento">
+      <div class="bento-card col-6">
+        <i class="num">01.1 · Arquitectura UX/UI</i>
+        <h3>Estructura Orientada a Conversión</h3>
+        <p>Diseño responsivo optimizado para móviles donde tus clientes pueden consultar servicios, precios y testimonios al instante.</p>
+      </div>
+      <div class="bento-card col-6">
+        <i class="num">01.2 · Catálogo de Servicios</i>
+        <h3>Presentación Clara & Detallada</h3>
+        <p>Organización estratégica de tu oferta de servicios con llamado a la acción directo en cada opción.</p>
+      </div>
+      <div class="bento-card col-12 bg-accent">
+        <i class="num">01.3 · Integración de Reservas</i>
+        <h3>Plataforma de Agendamiento Directo</h3>
+        <p>Conectamos tu sitio web con el sistema de reservas para que los clientes elijan fecha, hora y servicio sin intervención manual.</p>
+      </div>
+    </div>
+
+    <div id="web-mes2" class="bento" style="display:none;">
+      <div class="bento-card col-4">
+        <i class="num">01.4 · Mantenimiento Técnico</i>
+        <h3>Seguridad & Backups</h3>
+        <p>Actualizaciones continuas, copias de seguridad semanales y monitoreo de estabilidad 99.9% online.</p>
+      </div>
+      <div class="bento-card col-4">
+        <i class="num">01.5 · Optimización de Carga</i>
+        <h3>Velocidad Ultrarrápida</h3>
+        <p>Ajuste de imágenes y caché constante para que la página cargue en menos de 2 segundos en móviles.</p>
+      </div>
+      <div class="bento-card col-4">
+        <i class="num">01.6 · Actualizaciones de Contenido</i>
+        <h3>Soporte Continuo</h3>
+        <p>Cambios de precios, nuevos servicios o ajustes de promociones incluidos cada mes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 02: REDES -->
+<section id="redes" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">02 · Redes Sociales</span>
+      <h2>Generación constante de demanda</h2>
+      <p>Mantenemos tus canales digitales activos con contenido profesional que construye confianza y reputación.</p>
+    </div>
+
+    <div class="bento">
+      <div class="bento-card col-4">
+        <div class="stat-num">12–15</div>
+        <div class="stat-lbl">Publicaciones / Mes</div>
+        <p style="margin-top:16px;text-align:center;">Reels dinámicos y carruseles informativos diseñados para educar y vender.</p>
+      </div>
+      <div class="bento-card col-4">
+        <div class="stat-num">Stories</div>
+        <div class="stat-lbl">Secuencias Diarias</div>
+        <p style="margin-top:16px;text-align:center;">Historias enfocadas en testimonios, tras bambalinas y llamados de atención inmediatos.</p>
+      </div>
+      <div class="bento-card col-4">
+        <div class="stat-num">100%</div>
+        <div class="stat-lbl">Calendario Planificado</div>
+        <p style="margin-top:16px;text-align:center;">Aprobación previa de publicaciones para mantener alineado el tono de comunicación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 03: AUTOGESTIÓN -->
+<section id="autogestion" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Sistema de Autogestión</span>
+      <h2>Herramientas para escalar tu equipo</h2>
+      <p>Prepara la infraestructura tecnológica de tu negocio para operar de forma autónoma cuando contrates personal.</p>
+    </div>
+
+    <div class="bento">
+      <div class="bento-card col-4">
+        <i class="num">03.1 · Reservas 24/7</i>
+        <h3>Citas Automáticas</h3>
+        <p>Tus clientes eligen su horario disponible sin necesidad de cruzar mensajes por horas.</p>
+      </div>
+      <div class="bento-card col-4">
+        <i class="num">03.2 · Gestión de Personal</i>
+        <h3>Asignación de Equipo</h3>
+        <p>Panel diseñado para asignar turnos, zonas y clientes a tus colaboradores a medida que contrates personal.</p>
+      </div>
+      <div class="bento-card col-4">
+        <i class="num">03.3 · Recordatorios Automáticos</i>
+        <h3>Cero Ausencias</h3>
+        <p>Notificaciones y recordatorios automáticos por WhatsApp y correo para confirmar la asistencia del cliente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 04: SEO LOCAL -->
+<section id="seo" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">04 · Posicionamiento SEO Local</span>
+      <h2>Dominio en tu mercado geográfico</h2>
+      <p>Aparece exactamente cuando las personas buscan tus servicios en tu ciudad o zona de cobertura.</p>
+    </div>
+
+    <div class="bento">
+      <div class="bento-card col-6 bg-dark">
+        <i class="num" style="color:var(--color-accent);">04.1 · Google Business Profile</i>
+        <h3>Ficha de Google Negocio</h3>
+        <p>Optimización completa de tu perfil en Google Maps para destacar con reseñas, servicios y ubicación de primero en tu zona.</p>
+      </div>
+      <div class="bento-card col-6">
+        <i class="num">04.2 · SEO On-Page & Palabras Clave</i>
+        <h3>Búsquedas de Alta Intención</h3>
+        <p>Configuración de etiquetas y textos en tu web orientados a términos locales que generan contrataciones directas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 05: EL ECOSISTEMA -->
+<section id="ecosistema" class="on-dark reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" style="color:var(--color-accent);">05 · El Ecosistema Integrado</span>
+      <h2 style="color:#FFF;">Sincronía, Asesoría & Automatización</h2>
+      <p style="color:rgba(255,255,255,0.7);">
+        Todos los componentes trabajan conectados entre sí para crear una maquinaria de ventas continua.
+      </p>
+    </div>
+
+    <div class="flow-grid">
+      <div class="flow-node">
+        <div class="step">Paso 01</div>
+        <h4>Atracción</h4>
+        <p>Redes sociales y SEO local atraen clientes calificados de tu zona geográfica.</p>
+      </div>
+      <div class="flow-node">
+        <div class="step">Paso 02</div>
+        <h4>Conversión</h4>
+        <p>Tu Web profesional presenta la oferta y facilita la reserva automática de citas 24/7.</p>
+      </div>
+      <div class="flow-node">
+        <div class="step">Paso 03</div>
+        <h4>Autogestión</h4>
+        <p>El sistema notifica al cliente, recuerda la cita y organiza a tu equipo de trabajo.</p>
+      </div>
+      <div class="flow-node">
+        <div class="step">Paso 04</div>
+        <h4>Asesoría Mensual</h4>
+        <p>Acompañamiento estratégico constante para analizar métricas y ajustar metas de crecimiento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 06: TÉRMINOS DEL ACUERDO -->
+<section id="terminos" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">06 · Transparencia</span>
+      <h2>Términos del acuerdo</h2>
+      <p>Reglas claras desde el primer día para construir una relación comercial fluida y orientada a resultados.</p>
+    </div>
+
+    <div class="accordion">
+      <div class="acc-item open">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <span>01. ¿Qué aporta el cliente?</span>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="acc-body">
+          <p>El cliente suministra el logo existente, imágenes/fotografías del servicio, accesos a cuentas de redes o Google, y la información comercial necesaria para nutrir la web y los calendarios de publicación.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <span>02. Tiempos de entrega & Lanzamiento</span>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="acc-body">
+          <p>El despliegue de la web base, configuración de reservas y marca aplicada se realiza en menos de 2 semanas tras recibir los insumos iniciales.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <span>03. Herramientas & Costos externos</span>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="acc-body">
+          <p>Los costos de hosting, dominio web o suscripciones de plataformas de reservas de terceros son asumidos directamente por el cliente. Kreika se encarga de la configuración, integración y mantenimiento del ecosistema.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <span>04. Esquema de inversión & Permanencia</span>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="acc-body">
+          <p>La tarifa de setup e inicio durante el Mes 1 es de $450 USD. A partir del Mes 2 la cuota mensual se reduce a $350 USD/mes. Este ecosistema contempla una permanencia mínima de 6 meses para consolidar la estrategia y el posicionamiento del negocio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta reveal">
+  <div class="footer-cta-watermark" aria-hidden="true">
+    <img src="logo_antorcha blanco .svg" alt="Kreika Antorcha">
+  </div>
+  <div class="container footer-content">
+    <div class="footer-kicker">¿Listo para construir tu sistema?</div>
+    <h2 class="footer-headline">Empecemos a construir tu ecosistema.</h2>
+    <div class="footer-btns">
+      <a href="https://wa.me/584120770776?text=Hola%20Kreika%2C%20quiero%20conversar%20sobre%20la%20propuesta%20de%20Ecosistema%20Web%2BAutogesti%C3%B3n%20%F0%9F%99%8C" target="_blank" rel="noopener noreferrer" class="btn-wa-green">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 22c-1.85 0-3.66-.5-5.24-1.44l-.37-.22-3.87 1.02 1.03-3.78-.24-.39A9.94 9.94 0 0 1 2 12C2 6.48 6.48 2 12 2c2.67 0 5.18 1.04 7.07 2.93A9.93 9.93 0 0 1 22 12c0 5.52-4.48 10-10 10zm5.44-7.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01s-.52.07-.79.37c-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.1 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.89.12.58-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+        Hablar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Kreika &mdash; Ecosistema Digital</div>
+    <div>+58 412 077 0776</div>
+  </div>
+</footer>
+
+<script>
+/* TAB SWITCHING */
+function switchWebTab(tab, btn){
+  document.getElementById('web-mes1').style.display = tab === 'mes1' ? 'grid' : 'none';
+  document.getElementById('web-mes2').style.display = tab === 'mes2' ? 'grid' : 'none';
+  const btns = btn.parentElement.querySelectorAll('button');
+  btns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ACCORDION TOGGLE */
+function toggleAcc(el){
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+
+/* SCROLL REVEAL */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('active');
+    }
+  });
+},{ threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
