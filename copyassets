@@ -1,0 +1,6 @@
+import shutil
+src_hero = r"C:\Users\HP\.gemini\antigravity\brain\d1022548-9dd0-468e-a81b-490ad4359fdf\hero_model_1785267616136.png"
+src_about = r"C:\Users\HP\.gemini\antigravity\brain\d1022548-9dd0-468e-a81b-490ad4359fdf\about_model_1785267628915.png"
+shutil.copy(src_hero, "hero_model.png")
+shutil.copy(src_about, "about_model.png")
+print("Done")
