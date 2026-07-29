@@ -31,7 +31,7 @@
   --spacing-4: 4px; --spacing-8: 8px; --spacing-12: 12px;
   --spacing-16: 16px; --spacing-20: 20px; --spacing-24: 24px;
   --spacing-32: 32px; --spacing-48: 48px; --spacing-64: 64px;
-  --spacing-80: 80px; --spacing-120: 120px; --spacing-160: 160px;
+  --spacing-80: 80px; --spacing-120: 120px;
 
   --radius-pill: 999px;
   --radius-tags: 8px;
@@ -79,105 +79,86 @@ img{display:block;max-width:100%;height:auto;}
   margin-bottom:var(--spacing-16);
 }
 
-/* NAVIGATION (Matching Index & Landing Parity) */
-nav{
-  position:fixed;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:100;
-  width:calc(100% - 40px);
-  max-width:1100px;
-  background:rgba(255, 255, 255, 0.92);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-radius:var(--radius-nav);
-  box-shadow:var(--shadow-nav);
-  border:1px solid rgba(10,10,10,0.08);
-  padding:10px var(--spacing-20);
-}
-nav .wrap{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0;
-}
-.nav-left-group {
+/* ─────────────────────────────────────────────
+   NAVIGATION (Identical to Landing)
+   ───────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  background: rgba(250,250,250,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+  padding: 8px 16px 8px 12px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  max-width: 90vw;
 }
-.nav-back-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--color-bg-base);
-  color: var(--color-text-dark);
-  border: 1px solid rgba(0,0,0,0.1);
-  transition: all var(--dur-ui) var(--ease-ui);
-}
-.nav-back-button:hover {
-  background: var(--color-accent);
-  color: #fff;
-  border-color: var(--color-accent);
-}
-.nav-back-button svg { width: 16px; height: 16px; }
-
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  text-decoration: none;
 }
 .nav-logo-chip {
   width: 32px;
   height: 32px;
   background: var(--color-accent);
-  border-radius: 9px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 3px;
-  flex-shrink: 0;
+  padding: 2px;
 }
 .nav-logo-chip img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 6px;
 }
-
-.nav-pill-button {
-  background: var(--color-accent);
-  color: #FFFFFF !important;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
+.nav-pill {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  transition: background var(--dur-ui);
+}
+.nav-pill:hover {
+  background: rgba(0,0,0,0.05);
+}
+.nav-cta {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-bg-dark);
+  text-decoration: none;
   padding: 8px 18px;
   border-radius: var(--radius-pill);
-  box-shadow: 0 4px 15px rgba(197, 0, 34, 0.25);
-  transition: all var(--dur-ui) var(--ease-ui);
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
+  transition: transform var(--dur-ui);
 }
-.nav-pill-button:hover {
-  background: var(--color-accent-hover);
-  transform: translateY(-1px);
+.nav-cta:hover {
+  transform: scale(1.03);
 }
-
-.navlinks{
-  display:flex;gap:20px;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-muted);
+@media(max-width:767px){
+  .nav {
+    gap: 8px;
+    padding: 6px 12px;
+  }
+  .nav-pill { display: none; }
+  .nav-cta { padding: 6px 12px; font-size: 12px; }
 }
-.navlinks a:hover{
-  color:var(--color-accent);
-}
-
-@media(max-width:991px){.navlinks{display:none;}}
 
 /* HERO */
 .hero{
@@ -216,18 +197,19 @@ nav .wrap{
   z-index: 2;
 }
 @media(max-width:991px){
-  .hero-grid{grid-template-columns:1fr;gap:var(--spacing-48);}
+  .hero{ padding: 110px 0 var(--spacing-48); }
+  .hero-grid{grid-template-columns:1fr;gap:var(--spacing-32);}
   .hero-decoration{display:none;}
 }
 .hero h1{
   font-family:var(--font-display);
-  font-size:clamp(36px,6vw,54px);
+  font-size:clamp(32px,5.5vw,52px);
   font-weight:700;
-  line-height:0.95;
+  line-height:1.02;
   text-transform:uppercase;
   color:var(--color-text-dark);
   margin:var(--spacing-12) 0 var(--spacing-24);
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 }
 .hero h1 em{
   font-style:normal;
@@ -240,7 +222,7 @@ nav .wrap{
   max-width:54ch;
 }
 
-/* Swiss Price Tag with Red Pill & Antorcha */
+/* Swiss Price Tag */
 .tag-wrap{
   position:relative;
   display:inline-block;
@@ -261,26 +243,15 @@ nav .wrap{
   0%,100%{transform:rotate(1.5deg);}
   50%{transform:rotate(-1.5deg);}
 }
-.tag-kicker-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--color-accent);
-  color: #FFFFFF;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  margin-bottom: 16px;
+.tag .k{
+  font-family:var(--font-mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  margin-bottom:12px;
 }
-.tag-kicker-pill img {
-  width: 14px;
-  height: 14px;
-}
-
 .price-tiers{
   display:flex;align-items:center;justify-content:space-between;
   margin:var(--spacing-16) 0 var(--spacing-8);
@@ -321,11 +292,18 @@ nav .wrap{
   border-top:1px dashed var(--color-border-dark);
   padding-top:var(--spacing-16);
 }
+@media(max-width:767px){
+  .tag{ padding: var(--spacing-32) var(--spacing-20); }
+  .tier-price{ font-size:30px; }
+}
 
 /* SECTIONS GENERAL */
 section{
   padding:var(--spacing-120) 0;
   border-top:1px solid var(--color-border);
+}
+@media(max-width:767px){
+  section{ padding: var(--spacing-64) 0; }
 }
 .on-red{
   background:var(--color-accent);
@@ -339,15 +317,15 @@ section{
 }
 
 .sec-head{
-  margin-bottom:var(--spacing-64);
+  margin-bottom:var(--spacing-48);
   max-width:750px;
 }
 .sec-head h2{
   font-family:var(--font-display);
-  font-size:clamp(32px,5vw,48px);
+  font-size:clamp(28px,4.5vw,44px);
   font-weight:700;
   text-transform:uppercase;
-  line-height:1;
+  line-height:1.05;
   letter-spacing:-0.5px;
   margin-top:var(--spacing-8);
   display: flex;
@@ -362,55 +340,52 @@ section{
 }
 .on-red .sec-head p, .on-dark .sec-head p{color:rgba(255,255,255,0.8);}
 
-/* ANIMATED SVG ICONS */
+/* ANIMATION UTILITIES */
 .spin-gear {
-  width: 36px;
-  height: 36px;
-  animation: spinGear 10s linear infinite;
+  animation: spin 10s linear infinite;
+  display: inline-block;
   color: var(--color-accent);
-  flex-shrink: 0;
 }
-@keyframes spinGear {
+@keyframes spin {
+  from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
 .spin-globe {
-  width: 38px;
-  height: 38px;
-  animation: spinGlobe 12s linear infinite;
+  animation: spinSlow 15s linear infinite;
+  display: inline-block;
   color: var(--color-accent);
-  flex-shrink: 0;
 }
-@keyframes spinGlobe {
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-.dollar-anim-group {
+.bounce-dollars {
   display: inline-flex;
-  gap: 6px;
-  align-items: center;
-  color: #22c55e;
-  font-family: var(--font-display);
-  font-size: 28px;
+  gap: 4px;
 }
-.dollar-icon {
-  animation: floatMoney 2.5s ease-in-out infinite;
+.bounce-dollars span {
+  display: inline-block;
+  animation: dollarBounce 1.5s ease-in-out infinite;
+  color: var(--color-accent);
+  font-weight: 800;
 }
-.dollar-icon:nth-child(2) { animation-delay: 0.4s; }
-.dollar-icon:nth-child(3) { animation-delay: 0.8s; }
-@keyframes floatMoney {
-  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
-  50% { transform: translateY(-8px) scale(1.15); opacity: 1; text-shadow: 0 0 12px rgba(34,197,94,0.6); }
+.bounce-dollars span:nth-child(2) { animation-delay: 0.2s; }
+.bounce-dollars span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dollarBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-/* BENTO GRID & CARD SVG ICONS */
+/* BENTO GRID & SVG ICONS */
 .bento{
   display:grid;
   grid-template-columns:repeat(12,1fr);
   gap:var(--spacing-24);
 }
 @media(max-width:991px){
-  .bento{grid-template-columns:1fr;}
+  .bento{grid-template-columns:1fr;gap:var(--spacing-20);}
 }
 .bento-card{
   background:var(--color-bg-card);
@@ -420,6 +395,11 @@ section{
   position:relative;
   overflow:hidden;
   transition:all var(--dur-ui) var(--ease-ui);
+  display: flex;
+  flex-direction: column;
+}
+@media(max-width:767px){
+  .bento-card{ padding: var(--spacing-32) var(--spacing-24); }
 }
 .bento-card:hover{
   transform:translateY(-4px);
@@ -444,7 +424,7 @@ section{
   .col-8,.col-6,.col-4{grid-column:span 12;}
 }
 
-.card-header-icon {
+.bento-card-icon {
   width: 44px;
   height: 44px;
   border-radius: 12px;
@@ -454,20 +434,17 @@ section{
   align-items: center;
   justify-content: center;
   margin-bottom: var(--spacing-16);
-  transition: transform var(--dur-ui) var(--ease-ui);
+  flex-shrink: 0;
 }
-.bento-card:hover .card-header-icon {
-  transform: scale(1.1) rotate(-4deg);
-}
-.bento-card.bg-dark .card-header-icon {
-  background: rgba(255,255,255,0.1);
-  color: #FFFFFF;
-}
-.bento-card.bg-accent .card-header-icon {
+.bento-card.bg-accent .bento-card-icon {
   background: rgba(255,255,255,0.2);
   color: #FFFFFF;
 }
-.card-header-icon svg { width: 22px; height: 22px; }
+.bento-card.bg-dark .bento-card-icon {
+  background: rgba(197,0,34,0.2);
+  color: var(--color-accent);
+}
+.bento-card-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; }
 
 .bento-card i.num{
   font-family:var(--font-mono);
@@ -477,13 +454,12 @@ section{
   text-transform:uppercase;
   color:var(--color-accent);
   display:block;
-  margin-bottom:var(--spacing-8);
+  margin-bottom:var(--spacing-12);
 }
-.bento-card.bg-accent i.num, .bento-card.bg-dark i.num{color:rgba(255,255,255,0.7);}
-
+.bento-card.bg-accent i.num{color:rgba(255,255,255,0.8);}
 .bento-card h3{
   font-family:var(--font-display);
-  font-size:24px;
+  font-size:22px;
   font-weight:700;
   text-transform:uppercase;
   line-height:1.1;
@@ -507,6 +483,9 @@ section{
   overflow: hidden;
   box-shadow: 0 15px 40px rgba(197, 0, 34, 0.15);
 }
+@media(max-width:767px){
+  .gift-banner{ padding: var(--spacing-32) var(--spacing-20); }
+}
 .gift-pill {
   display: inline-flex;
   align-items: center;
@@ -527,32 +506,23 @@ section{
   gap: var(--spacing-20);
   margin-top: var(--spacing-32);
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
+  .gift-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 576px) {
   .gift-grid { grid-template-columns: 1fr; }
 }
 .gift-item {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 18px;
-  padding: var(--spacing-24);
-  transition: transform var(--dur-ui) var(--ease-ui);
-}
-.gift-item:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: var(--spacing-20);
 }
 .gift-item-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: rgba(197,0,34,0.25);
-  color: #FF4D6D;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 14px;
+  color: var(--color-accent);
+  margin-bottom: 10px;
 }
-.gift-item-icon svg { width: 20px; height: 20px; }
+.gift-item-icon svg { width: 22px; height: 22px; }
 .gift-item h4 {
   font-family: var(--font-display);
   font-size: 16px;
@@ -573,6 +543,12 @@ section{
   border-radius:var(--radius-pill);
   border:1px solid var(--color-border);
   margin-bottom:var(--spacing-32);
+  flex-wrap: wrap;
+  gap: 6px;
+}
+@media(max-width:576px){
+  .toggle{ width: 100%; border-radius: 16px; }
+  .toggle button { flex: 1; text-align: center; font-size: 10px; padding: 10px 12px; }
 }
 .toggle button{
   border:none;
@@ -593,17 +569,10 @@ section{
   color:#FFFFFF;
 }
 
-/* METRICS CARDS */
-.stat-box{
-  background:var(--color-bg-base);
-  border:1px solid var(--color-border);
-  border-radius:16px;
-  padding:var(--spacing-24);
-  text-align:center;
-}
+/* METRICS / STATS CARDS */
 .stat-num{
   font-family:var(--font-display);
-  font-size:48px;
+  font-size:42px;
   font-weight:700;
   color:var(--color-accent);
   line-height:1;
@@ -617,18 +586,18 @@ section{
   margin-top:8px;
 }
 
-/* FLOW NODES WITH GLOWING ANIMATED ARROWS (Ecosistema) */
-.flow-grid-wrap {
-  position: relative;
-  margin-top: var(--spacing-48);
-}
+/* FLOW NODES (Ecosistema) */
 .flow-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:var(--spacing-20);
+  margin-top:var(--spacing-48);
 }
 @media(max-width:991px){
-  .flow-grid{grid-template-columns:1fr;gap:var(--spacing-32);}
+  .flow-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:576px){
+  .flow-grid{grid-template-columns:1fr;}
 }
 .flow-node{
   background:rgba(255,255,255,0.05);
@@ -636,12 +605,6 @@ section{
   border-radius:var(--radius-cards);
   padding:var(--spacing-32);
   position:relative;
-  transition: all var(--dur-ui) var(--ease-ui);
-}
-.flow-node:hover {
-  border-color: var(--color-accent);
-  transform: translateY(-4px);
-  background: rgba(255,255,255,0.08);
 }
 .flow-node .step{
   font-family:var(--font-mono);
@@ -653,14 +616,14 @@ section{
   align-items: center;
   justify-content: space-between;
 }
-.step-arrow-pulse {
+.flow-arrow-pulse {
+  display: inline-flex;
   color: var(--color-accent);
-  font-size: 18px;
-  animation: pulseArrow 1.5s ease-in-out infinite;
+  animation: arrowPulse 1.5s infinite;
 }
-@keyframes pulseArrow {
-  0%, 100% { transform: translateX(0); opacity: 0.6; }
-  50% { transform: translateX(5px); opacity: 1; text-shadow: 0 0 10px var(--color-accent); }
+@keyframes arrowPulse {
+  0%, 100% { opacity: 0.3; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(4px); }
 }
 .flow-node h4{
   font-family:var(--font-display);
@@ -698,6 +661,9 @@ section{
   font-weight:700;
   user-select:none;
 }
+@media(max-width:767px){
+  .acc-header{ padding: var(--spacing-20); font-size: 16px; }
+}
 .acc-icon{
   width:24px;height:24px;
   transition:transform var(--dur-ui);
@@ -712,6 +678,9 @@ section{
 .acc-item.open .acc-body{
   padding:0 var(--spacing-32) var(--spacing-32);
   max-height:500px;
+}
+@media(max-width:767px){
+  .acc-item.open .acc-body{ padding: 0 var(--spacing-20) var(--spacing-20); }
 }
 .acc-body p{
   font-size:14px;
@@ -739,7 +708,7 @@ section{
 }
 .footer-headline{
   font-family:var(--font-display);
-  font-size:clamp(32px,6vw,64px);
+  font-size:clamp(30px,5.5vw,60px);
   font-weight:700;
   text-transform:uppercase;
   line-height:0.95;
@@ -752,8 +721,6 @@ section{
   gap:var(--spacing-16);
   flex-wrap:wrap;
 }
-
-/* WhatsApp Gradient Button (Matching Index Parity) */
 .btn-wa-green {
   display: inline-flex;
   align-items: center;
@@ -775,7 +742,6 @@ section{
   box-shadow: 0 14px 40px rgba(37,211,102,0.45);
   background: linear-gradient(135deg, #2cf476 0%, #20d569 100%);
 }
-
 .footer-cta-watermark {
   position: absolute;
   left: 5%;
@@ -848,37 +814,19 @@ footer .wrap{
 <body>
 
 <!-- NAVIGATION -->
-<nav>
-  <div class="wrap">
-    <div class="nav-left-group">
-      <a href="landing.html" class="nav-back-button" title="Volver al inicio">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
-        </svg>
-      </a>
-      <a href="landing.html" class="nav-logo">
-        <div class="nav-logo-chip">
-          <img src="logo_antorcha blanco .svg" alt="Kreika Antorcha">
-        </div>
-        <img src="logo_kreika logotipo negro.svg" alt="Kreika" style="height:26px;width:auto;display:block;">
-      </a>
+<nav class="nav">
+  <a href="landing.html" class="nav-logo">
+    <div class="nav-logo-chip">
+      <img src="logo_antorcha blanco .svg" alt="Kreika Antorcha">
     </div>
-
-    <div class="navlinks">
-      <a href="#welcome">00 Marca</a>
-      <a href="#web">01 Web</a>
-      <a href="#redes">02 Redes</a>
-      <a href="#autogestion">03 Autogestión</a>
-      <a href="#seo">04 SEO</a>
-      <a href="#ecosistema">05 Ecosistema</a>
-      <a href="#terminos">06 Términos</a>
-    </div>
-
-    <a href="propuesta-web-autogestion-seo.html" class="nav-pill-button">
-      Ecosistema Web + Autogestión
-    </a>
-  </div>
+    <img src="logo_kreika logotipo negro.svg" alt="Kreika" style="height:28px;width:auto;display:block;">
+  </a>
+  <a href="propuesta-shopify-instagram.html" class="nav-pill">Ecosistema IG + Shopify</a>
+  <a href="propuesta-web-autogestion-seo.html" class="nav-pill" style="background:rgba(0,0,0,0.05);font-weight:600;">Ecosistema Web + Autogestión</a>
+  <a href="https://wa.me/584120770776?text=Hola%20Kreika%2C%20quiero%20info%20sobre%20sus%20servicios%20👋" target="_blank" rel="noopener" class="nav-cta">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52z"/></svg>
+    Hablemos
+  </a>
 </nav>
 
 <!-- HERO -->
@@ -900,10 +848,7 @@ footer .wrap{
 
     <div class="tag-wrap">
       <div class="tag">
-        <div class="tag-kicker-pill">
-          <img src="logo_antorcha blanco .svg" alt="Kreika Torch">
-          Ecosistema Web + Autogestión
-        </div>
+        <div class="k">Ecosistema Web + Autogestión</div>
         <div class="price-tiers">
           <div class="price-tier">
             <div class="tier-label">Mes 1 (Setup)</div>
@@ -944,28 +889,28 @@ footer .wrap{
       <div class="gift-grid">
         <div class="gift-item">
           <div class="gift-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           </div>
           <h4>Mood Board</h4>
           <p>Dirección estética y paleta cromática de apoyo para imágenes y plataforma.</p>
         </div>
         <div class="gift-item">
           <div class="gift-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
           <h4>Tono de Comunicación</h4>
           <p>Manual del estilo verbal, respuestas y personalidad para hablar con tus clientes.</p>
         </div>
         <div class="gift-item">
           <div class="gift-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
           <h4>Buyer Persona</h4>
           <p>Perfilamiento estratégico de tu cliente ideal para dirigir las ofertas exactas.</p>
         </div>
         <div class="gift-item">
           <div class="gift-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           </div>
           <h4>Plantillas Gráficas</h4>
           <p>Formatos editables para redes y web con la imagen uniforme de tu negocio.</p>
@@ -982,10 +927,9 @@ footer .wrap{
       <span class="eyebrow">01 · Sitio Web Profesional</span>
       <h2>
         Tu centro de operaciones 24/7
-        <svg class="spin-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-        </svg>
+        <span class="spin-gear">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </span>
       </h2>
       <p>Una página web moderna, veloz y optimizada para convertir visitantes en clientes agendados.</p>
     </div>
@@ -997,24 +941,24 @@ footer .wrap{
 
     <div id="web-mes1" class="bento">
       <div class="bento-card col-6">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
         <i class="num">01.1 · Arquitectura UX/UI</i>
         <h3>Estructura Orientada a Conversión</h3>
         <p>Diseño responsivo optimizado para móviles donde tus clientes pueden consultar servicios, precios y testimonios al instante.</p>
       </div>
       <div class="bento-card col-6">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         </div>
         <i class="num">01.2 · Catálogo de Servicios</i>
         <h3>Presentación Clara & Detallada</h3>
         <p>Organización estratégica de tu oferta de servicios con llamado a la acción directo en cada opción.</p>
       </div>
       <div class="bento-card col-12 bg-accent">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
         </div>
         <i class="num">01.3 · Integración de Reservas</i>
         <h3>Plataforma de Agendamiento Directo</h3>
@@ -1024,24 +968,24 @@ footer .wrap{
 
     <div id="web-mes2" class="bento" style="display:none;">
       <div class="bento-card col-4">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <i class="num">01.4 · Mantenimiento Técnico</i>
         <h3>Seguridad & Backups</h3>
         <p>Actualizaciones continuas, copias de seguridad semanales y monitoreo de estabilidad 99.9% online.</p>
       </div>
       <div class="bento-card col-4">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
         <i class="num">01.5 · Optimización de Carga</i>
         <h3>Velocidad Ultrarrápida</h3>
         <p>Ajuste de imágenes y caché constante para que la página cargue en menos de 2 segundos en móviles.</p>
       </div>
       <div class="bento-card col-4">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         </div>
         <i class="num">01.6 · Actualizaciones de Contenido</i>
         <h3>Soporte Continuo</h3>
@@ -1058,10 +1002,8 @@ footer .wrap{
       <span class="eyebrow">02 · Redes Sociales</span>
       <h2>
         Generación constante de demanda
-        <span class="dollar-anim-group" aria-hidden="true">
-          <span class="dollar-icon">$</span>
-          <span class="dollar-icon">$</span>
-          <span class="dollar-icon">$</span>
+        <span class="bounce-dollars">
+          <span>$</span><span>$</span><span>$</span>
         </span>
       </h2>
       <p>Mantenemos tus canales digitales activos con contenido profesional que construye confianza y reputación.</p>
@@ -1069,28 +1011,28 @@ footer .wrap{
 
     <div class="bento">
       <div class="bento-card col-4">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </div>
         <div class="stat-num">12–15</div>
         <div class="stat-lbl">Publicaciones / Mes</div>
-        <p style="margin-top:16px;text-align:center;">Reels dinámicos y carruseles informativos diseñados para educar y vender.</p>
+        <p style="margin-top:16px;">Reels dinámicos y carruseles informativos diseñados para educar y vender.</p>
       </div>
       <div class="bento-card col-4">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
         </div>
         <div class="stat-num">Stories</div>
         <div class="stat-lbl">Secuencias Diarias</div>
-        <p style="margin-top:16px;text-align:center;">Historias enfocadas en testimonios, tras bambalinas y llamados de atención inmediatos.</p>
+        <p style="margin-top:16px;">Historias enfocadas en testimonios, tras bambalinas y llamados de atención inmediatos.</p>
       </div>
       <div class="bento-card col-4">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </div>
         <div class="stat-num">100%</div>
         <div class="stat-lbl">Calendario Planificado</div>
-        <p style="margin-top:16px;text-align:center;">Aprobación previa de publicaciones para mantener alineado el tono de comunicación.</p>
+        <p style="margin-top:16px;">Aprobación previa de publicaciones para mantener alineado el tono de comunicación.</p>
       </div>
     </div>
   </div>
@@ -1107,24 +1049,24 @@ footer .wrap{
 
     <div class="bento">
       <div class="bento-card col-4">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <i class="num">03.1 · Reservas 24/7</i>
         <h3>Citas Automáticas</h3>
         <p>Tus clientes eligen su horario disponible sin necesidad de cruzar mensajes por horas.</p>
       </div>
       <div class="bento-card col-4">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <i class="num">03.2 · Gestión de Personal</i>
         <h3>Asignación de Equipo</h3>
         <p>Panel diseñado para asignar turnos, zonas y clientes a tus colaboradores a medida que contrates personal.</p>
       </div>
       <div class="bento-card col-4">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         </div>
         <i class="num">03.3 · Recordatorios Automáticos</i>
         <h3>Cero Ausencias</h3>
@@ -1141,27 +1083,25 @@ footer .wrap{
       <span class="eyebrow">04 · Posicionamiento SEO Local</span>
       <h2>
         Dominio en tu mercado geográfico
-        <svg class="spin-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="2" y1="12" x2="22" y2="12"/>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-        </svg>
+        <span class="spin-globe">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </span>
       </h2>
       <p>Aparece exactamente cuando las personas buscan tus servicios en tu ciudad o zona de cobertura.</p>
     </div>
 
     <div class="bento">
       <div class="bento-card col-6 bg-dark">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <i class="num" style="color:var(--color-accent);">04.1 · Google Business Profile</i>
         <h3>Ficha de Google Negocio</h3>
         <p>Optimización completa de tu perfil en Google Maps para destacar con reseñas, servicios y ubicación de primero en tu zona.</p>
       </div>
       <div class="bento-card col-6">
-        <div class="card-header-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div class="bento-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
         <i class="num">04.2 · SEO On-Page & Palabras Clave</i>
         <h3>Búsquedas de Alta Intención</h3>
@@ -1182,40 +1122,38 @@ footer .wrap{
       </p>
     </div>
 
-    <div class="flow-grid-wrap">
-      <div class="flow-grid">
-        <div class="flow-node">
-          <div class="step">
-            Paso 01
-            <span class="step-arrow-pulse">→</span>
-          </div>
-          <h4>Atracción</h4>
-          <p>Redes sociales y SEO local atraen clientes calificados de tu zona geográfica.</p>
+    <div class="flow-grid">
+      <div class="flow-node">
+        <div class="step">
+          Paso 01
+          <span class="flow-arrow-pulse">→</span>
         </div>
-        <div class="flow-node">
-          <div class="step">
-            Paso 02
-            <span class="step-arrow-pulse">→</span>
-          </div>
-          <h4>Conversión</h4>
-          <p>Tu Web profesional presenta la oferta y facilita la reserva automática de citas 24/7.</p>
+        <h4>Atracción</h4>
+        <p>Redes sociales y SEO local atraen clientes calificados de tu zona geográfica.</p>
+      </div>
+      <div class="flow-node">
+        <div class="step">
+          Paso 02
+          <span class="flow-arrow-pulse">→</span>
         </div>
-        <div class="flow-node">
-          <div class="step">
-            Paso 03
-            <span class="step-arrow-pulse">→</span>
-          </div>
-          <h4>Autogestión</h4>
-          <p>El sistema notifica al cliente, recuerda la cita y organiza a tu equipo de trabajo.</p>
+        <h4>Conversión</h4>
+        <p>Tu Web profesional presenta la oferta y facilita la reserva automática de citas 24/7.</p>
+      </div>
+      <div class="flow-node">
+        <div class="step">
+          Paso 03
+          <span class="flow-arrow-pulse">→</span>
         </div>
-        <div class="flow-node" style="border-color:var(--color-accent);background:rgba(197,0,34,0.15);">
-          <div class="step" style="color:#FFF;">
-            Paso 04
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-          </div>
-          <h4 style="color:var(--color-accent);">Asesoría Mensual</h4>
-          <p>Acompañamiento estratégico constante con Kreika para analizar métricas y escalar metas de negocio.</p>
+        <h4>Autogestión</h4>
+        <p>El sistema notifica al cliente, recuerda la cita y organiza a tu equipo de trabajo.</p>
+      </div>
+      <div class="flow-node">
+        <div class="step">
+          Paso 04
+          <span class="flow-arrow-pulse">★</span>
         </div>
+        <h4>Asesoría Mensual</h4>
+        <p>Acompañamiento estratégico constante para analizar métricas y ajustar metas de crecimiento.</p>
       </div>
     </div>
   </div>
