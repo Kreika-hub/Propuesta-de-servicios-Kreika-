@@ -80,81 +80,7 @@ img{display:block;max-width:100%;height:auto;}
 }
 @media(max-width:767px){.container{padding:0 var(--spacing-20);}}
 
-/* ─────────────────────────────────────────────
-   NAVIGATION
-   ───────────────────────────────────────────── */
-.nav{
-  position:fixed;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:100;
-  width:calc(100% - 40px);
-  max-width:1100px;
-  background:rgba(255, 255, 255, 0.85);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-radius:var(--radius-nav);
-  box-shadow:var(--shadow-nav);
-  border:1px solid rgba(10,10,10,0.05);
-  padding:12px var(--spacing-24);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.nav-logo{
-  display:flex;align-items:center;gap:10px;
-}
-.nav-logo-chip{
-  width:32px;height:32px;
-  background:var(--color-accent);
-  border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  transition:transform var(--dur-ui) var(--ease-ui);
-}
-.nav-logo:hover .nav-logo-chip{
-  transform:rotate(-10deg) scale(1.05);
-}
-.nav-logo-chip svg{width:16px;height:16px;}
-.nav-brand{
-  font-family:var(--font-display);
-  font-size:20px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-  color:var(--color-text-dark);
-}
-.nav-pill{
-  font-family:var(--font-mono);
-  font-size:10px;
-  font-weight:500;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  color:var(--color-accent);
-  background:var(--color-accent-subtle);
-  padding:6px 14px;
-  border-radius:var(--radius-pill);
-  border: 1px solid rgba(197, 0, 34, 0.15);
-  transition: all var(--dur-ui) var(--ease-ui);
-}
-.nav-pill:hover{
-  background:var(--color-accent);
-  color:#FFFFFF;
-  border-color:var(--color-accent);
-}
-.nav-cta{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--color-text-dark);
-  color:var(--color-bg-card);
-  font-size:13px;font-weight:500;
-  padding:9px 18px;
-  border-radius:var(--radius-buttons);
-  transition:all var(--dur-ui) var(--ease-ui);
-}
-.nav-cta:hover{
-  background:var(--color-accent);
-  transform:translateY(-1px);
-}
+
 
 /* ─────────────────────────────────────────────
    HERO
@@ -986,7 +912,7 @@ img{display:block;max-width:100%;height:auto;}
 
 <!-- ─── Navigation ─── -->
 <nav class="nav">
-  <a href="landing.html" class="nav-logo" title="Volver al inicio">
+  <a href="index.html" class="nav-logo" title="Volver al inicio">
     <div class="nav-logo-chip"></div>
     <img src="logo_kreika logotipo negro.svg" alt="Kreika" style="height:22px;width:auto;display:block;">
   </a>
