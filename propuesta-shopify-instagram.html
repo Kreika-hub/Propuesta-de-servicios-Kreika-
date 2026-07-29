@@ -140,8 +140,31 @@ nav .wrap{
 .navlinks{
   display:flex;gap:24px;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-muted);
 }
-.navlinks a{transition:color var(--dur-ui);}
-.navlinks a:hover{color:var(--color-accent);}
+.navlinks a{transition:color  text-decoration:none;
+}
+.navlinks a:hover{
+  opacity:1;color:var(--color-accent);
+}
+.nav-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-bg-base);
+  color: var(--color-text-dark);
+  margin-right: 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: all var(--dur-ui) var(--ease-ui);
+}
+.nav-back-button:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+.nav-back-button svg { width: 16px; height: 16px; }
+
 @media(max-width:767px){.navlinks{display:none;}}
 
 /* ─────────────────────────────────────────────
@@ -150,15 +173,57 @@ nav .wrap{
 .hero{
   padding:140px 0 var(--spacing-80);
   background:var(--color-bg-base);
+  position: relative;
+}
+.hero-decoration {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.hero-decoration svg.dots-layer {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+}
+.dotted-line {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 6;
+  opacity: 0.2;
+  animation: moveDots 20s linear infinite;
+}
+.line-reverse {
+  animation-direction: reverse;
+}
+@keyframes moveDots {
+  to { stroke-dashoffset: -400; }
+}
+.float-icon {
+  position: absolute;
+  color: var(--color-accent);
+  opacity: 0.15;
+  animation: float 6s ease-in-out infinite;
+}
+.float-1 { top: 20%; left: 8%; width: 48px; height: 48px; }
+.float-2 { bottom: 15%; left: 45%; width: 64px; height: 64px; animation-delay: -2s; }
+.float-3 { top: 15%; right: 8%; width: 56px; height: 56px; animation-delay: -4s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(5deg); }
 }
 .hero-grid{
   display:grid;
   grid-template-columns:1.2fr 0.8fr;
   gap:var(--spacing-64);
   align-items:center;
+  position: relative;
+  z-index: 2;
 }
 @media(max-width:991px){
   .hero-grid{grid-template-columns:1fr;gap:var(--spacing-48);}
+  .hero-decoration{display:none;}
 }
 .hero h1{
   font-family:var(--font-display);
@@ -215,7 +280,7 @@ nav .wrap{
 }
 .tag .k{
   font-family:var(--font-mono);
-  font-size:9px;
+  font-size:11px;
   font-weight:500;
   letter-spacing:1px;
   text-transform:uppercase;
@@ -229,7 +294,7 @@ nav .wrap{
 .price-tier{text-align:left;}
 .tier-label{
   font-family:var(--font-mono);
-  font-size:9px;
+  font-size:11px;
   text-transform:uppercase;
   letter-spacing:0.5px;
   color:#AAAAAA;
@@ -255,7 +320,7 @@ nav .wrap{
 }
 .tag .terms{
   font-family:var(--font-mono);
-  font-size:10px;
+  font-size:11px;
   color:rgba(255,255,255,0.6);
   line-height:1.6;
   margin-top:var(--spacing-20);
@@ -340,92 +405,123 @@ section{
 #regalo{
   background:var(--color-bg-base);
 }
-.welcome-grid{
-  display:grid;
-  grid-template-columns:1.20fr 0.80fr;
-  gap:var(--spacing-64);
-  align-items:start;
+/* Bento Grid Layout */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+  margin-top: var(--spacing-32);
 }
+@media (max-width: 991px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+}
+@media (max-width: 479px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bento-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-32);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: all var(--dur-ui) var(--ease-ui);
+}
+.bento-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.06);
+}
+.bento-card.bg-accent {
+  background: var(--color-accent-subtle);
+  border-color: rgba(197, 0, 34, 0.15);
+}
+.bento-card.bg-dark {
+  background: var(--color-bg-dark);
+  color: #fff;
+  border-color: var(--color-border-dark);
+}
+.bento-card-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-accent);
+}
+.bento-card.bg-dark .bento-card-label {
+  color: rgba(255,255,255,0.6);
+}
+.bento-card h3 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 0.95;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.02em;
+  color: var(--color-text-dark);
+}
+.bento-card.bg-dark h3 {
+  color: #fff;
+}
+.bento-card p {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+.bento-card.bg-dark p {
+  color: rgba(255,255,255,0.7);
+}
+
+.bento-img-card {
+  border-radius: var(--radius-cards);
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  min-height: 300px;
+}
+.bento-img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-ui);
+}
+.bento-img-card:hover img {
+  transform: scale(1.05);
+}
+.col-span-2 { grid-column: span 2; }
+.row-span-2 { grid-row: span 2; }
 @media(max-width:991px){
-  .welcome-grid{grid-template-columns:1fr;gap:var(--spacing-48);}
+  .row-span-2 { grid-row: auto; }
 }
 
-.gift-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:var(--spacing-16);
-  margin-bottom:var(--spacing-32);
+.bento-decorative-circle {
+  position: absolute;
+  border: 1px dashed rgba(197, 0, 34, 0.3);
+  border-radius: 50%;
+  width: 400px;
+  height: 400px;
+  bottom: -150px;
+  right: -100px;
+  pointer-events: none;
 }
-.gift-card{
-  background:var(--color-bg-card);
-  border:1px solid var(--color-border);
-  border-radius:var(--radius-cards);
-  padding:var(--spacing-32);
-  transition:all var(--dur-ui) var(--ease-ui);
-}
-.gift-card:hover{
-  border-color:var(--color-accent);
-  box-shadow:var(--shadow-card);
-}
-.gift-card .num{
-  font-family:var(--font-mono);
-  font-size:11px;
-  font-weight:600;
-  color:var(--color-accent);
-  margin-bottom:8px;
-}
-.gift-card h3{
-  font-family:var(--font-display);
-  font-size:20px;
-  font-weight:700;
-  text-transform:uppercase;
-  margin-bottom:8px;
-}
-.gift-card p{
-  font-size:14px;
-  color:var(--color-text-muted);
-}
-.gift-flag{
-  display:inline-flex;
-  font-family:var(--font-mono);
-  font-size:10px;
-  font-weight:500;
-  letter-spacing:0.5px;
-  text-transform:uppercase;
-  color:var(--color-accent);
-  background:var(--color-accent-subtle);
-  border:1px solid rgba(197, 0, 34, 0.15);
-  padding:8px 16px;
-  border-radius:var(--radius-pill);
-}
-
-/* Offset Frame style for about model photo */
-.welcome-photo-container{
-  position:relative;
-  display:flex;
-  justify-content:center;
-  margin-top:var(--spacing-32);
-}
-.welcome-photo-offset{
-  position:relative;
-  width:100%;
-  max-width:340px;
-  aspect-ratio:3/4;
-  background:var(--color-accent);
-  border-radius:var(--radius-cards);
-}
-.welcome-photo-offset img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:var(--radius-cards);
-  border:1px solid var(--color-border);
-  background:var(--color-bg-card);
-  transform:translate(-12px, -12px);
-  transition: transform var(--dur-ui) var(--ease-ui);
-}
-.welcome-photo-container:hover .welcome-photo-offset img{
-  transform:translate(-6px, -6px);
+@media(max-width:479px){
+  .bento-decorative-circle {
+    width: 200px; height: 200px;
+    bottom: -60px; right: -50px;
+  }
 }
 
 /* ─────────────────────────────────────────────
@@ -444,7 +540,7 @@ section{
   background:transparent;
   padding:10px 20px;
   font-family:var(--font-mono);
-  font-size:10px;
+  font-size:11px;
   letter-spacing:0.5px;
   text-transform:uppercase;
   font-weight:600;
@@ -506,7 +602,7 @@ section{
   background:var(--color-bg-card);
   border:1px solid var(--color-border);
   border-radius:var(--radius-cards);
-  padding:var(--spacing-40) var(--spacing-32);
+  padding:var(--spacing-48) var(--spacing-32);
   transition:all var(--dur-ui) var(--ease-ui);
 }
 .ig-card:hover{
@@ -520,16 +616,18 @@ section{
   line-height:1;
   font-weight:700;
   color:var(--color-accent);
-  margin-bottom:12px;
+  margin-bottom:16px;
 }
 .ig-card h4{
   font-family:var(--font-display);
   font-size:18px;
   text-transform:uppercase;
+  letter-spacing:0.5px;
   margin-bottom:12px;
 }
 .ig-card p{
-  font-size:13.5px;
+  font-size:14.5px;
+  line-height:1.6;
   color:var(--color-text-muted);
 }
 
@@ -545,26 +643,60 @@ section{
   flex-wrap:wrap;
 }
 .flow-node{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.1);
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,0.05);
   border-radius:18px;
-  padding:var(--spacing-24);
+  padding:var(--spacing-24) var(--spacing-24) var(--spacing-20);
   flex:1;
   min-width:180px;
   font-size:13px;
-  color:rgba(255,255,255,0.8);
+  color:var(--color-text-muted);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  position:relative;
 }
 .flow-node b{
   display:block;
   font-family:var(--font-display);
   font-size:16px;
   text-transform:uppercase;
-  color:var(--color-accent);
+  color:var(--color-text-dark);
   margin-bottom:8px;
 }
+.flow-node-icon {
+  margin-bottom: 12px;
+  color: var(--color-accent);
+}
+.flow-node-icon svg { width: 28px; height: 28px; }
+
 .flow-arrow{
   color:rgba(255,255,255,0.25);
   display:flex;justify-content:center;
+  align-items: center;
+}
+.animated-arrow svg {
+  width: 28px;
+  height: 28px;
+  color: #FFFFFF;
+  animation: pulseArrow 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
+}
+@keyframes pulseArrow {
+  0% { transform: translateX(0); opacity: 0.3; }
+  50% { transform: translateX(12px); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0.3; }
+}
+.sparkle-icon {
+  display: inline-block;
+}
+.sparkle-icon svg {
+  animation: spinSlow 3s linear infinite;
+  transform-origin: center;
+  color: #FFFFFF;
+}
+@keyframes spinSlow {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.3); }
+  100% { transform: rotate(360deg) scale(1); }
 }
 @media(max-width:991px){
   .flow{flex-direction:column;align-items:stretch;}
@@ -580,10 +712,11 @@ section{
   .auto-grid{grid-template-columns:1fr;gap:var(--spacing-20);}
 }
 .auto-card{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.06);
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,0.05);
   border-radius:var(--radius-cards);
   padding:var(--spacing-32);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
 }
 .auto-card i{
   font-family:var(--font-mono);
@@ -599,13 +732,18 @@ section{
   font-family:var(--font-display);
   font-size:18px;
   text-transform:uppercase;
-  color:#FFFFFF;
+  color:var(--color-text-dark);
   margin-bottom:10px;
 }
 .auto-card p{
   font-size:13px;
-  color:rgba(255,255,255,0.7);
+  color:var(--color-text-muted);
 }
+.auto-card-icon {
+  margin-bottom: 16px;
+  color: var(--color-accent);
+}
+.auto-card-icon svg { width: 32px; height: 32px; }
 
 /* ─────────────────────────────────────────────
    ACCOORDION / TERMINOS SECTION
@@ -756,7 +894,7 @@ footer{
   background:var(--color-bg-dark);
   color:rgba(255,255,255,0.6);
   font-family:var(--font-mono);
-  font-size:10px;
+  font-size:11px;
   letter-spacing:0.5px;
   text-transform:uppercase;
   border-top:1px solid var(--color-border-dark);
@@ -790,6 +928,11 @@ footer .wrap{
 <nav>
   <div class="wrap">
     <div class="brand">
+      <a href="landing.html" class="nav-back-button" aria-label="Volver al Inicio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </a>
       <div class="chip" style="overflow:hidden;padding:2px;">
         <img src="logo_antorcha blanco .svg" alt="Kreika Antorcha" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
       </div>
@@ -807,6 +950,22 @@ footer .wrap{
 
 <!-- ─── Hero ─── -->
 <header class="hero">
+  <div class="hero-decoration" aria-hidden="true">
+    <svg class="dots-layer" viewBox="0 0 1000 500" preserveAspectRatio="none">
+      <path d="M 0 100 L 600 100 C 800 100, 850 300, 850 500" class="dotted-line" />
+      <path d="M 1000 400 L 500 400 C 300 400, 200 200, 200 0" class="dotted-line line-reverse" />
+      <path d="M 100 500 L 100 200 C 100 50, 400 50, 600 50" class="dotted-line" />
+    </svg>
+    <div class="float-icon float-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+    </div>
+    <div class="float-icon float-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+    </div>
+    <div class="float-icon float-3">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    </div>
+  </div>
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Propuesta de crecimiento digital · end-to-end</span>
@@ -835,53 +994,79 @@ footer .wrap{
   </div>
 </header>
 
-<!-- ─── Regalo de bienvenida (Welcome section with B&W editorial portrait) ─── -->
+<!-- ─── Regalo de bienvenida (Bento Grid) ─── -->
 <section id="regalo">
-  <div class="wrap welcome-grid">
-    <div class="reveal">
-      <div class="chapter-head">
-        <span class="chapter-num">00</span>
-        <h2>Regalo de bienvenida</h2>
-        <span class="gift-icon" aria-hidden="true">
-          <svg viewBox="0 0 64 64">
-            <rect x="10" y="28" width="44" height="28" rx="6" fill="#C50022" stroke="#000000" stroke-width="1.8"/>
-            <rect x="10" y="28" width="44" height="7" fill="#000000"/>
-            <rect x="28.5" y="28" width="7" height="28" fill="#000000"/>
-            <g class="gift-lid">
-              <rect x="6" y="18" width="52" height="12" rx="4" fill="#0A0A0A" stroke="#C50022" stroke-width="1.8"/>
-              <path d="M32 18 C 24 6, 12 8, 18 16 C 22 20, 28 19, 32 18Z" fill="#C50022"/>
-              <path d="M32 18 C 40 6, 52 8, 46 16 C 42 20, 36 19, 32 18Z" fill="#C50022"/>
-            </g>
-            <path class="gift-sparkle" d="M32 2l1.6 5.4L39 9l-5.4 1.6L32 16l-1.6-5.4L25 9l5.4-1.6L32 2z" fill="#C50022"/>
-          </svg>
-        </span>
-      </div>
-      <p class="kicker">Antes de vender un solo producto, tu marca necesita verse como tal. Por eso el Mes 1 incluye tu identidad visual completa, sin costo adicional — un trabajo que cualquier agencia facturaría aparte por encima de los $1.200 USD.</p>
-
-      <div class="gift-grid">
-        <div class="gift-card">
-          <div class="num">01</div>
-          <h3>Renovación de logotipo</h3>
-          <p>Adaptación moderna y legible, optimizada para ícono de perfil de Instagram y cabecera web.</p>
-        </div>
-        <div class="gift-card">
-          <div class="num">02</div>
-          <h3>Brand board oficial</h3>
-          <p>Paleta de colores y tipografías corporativas, para que web y redes luzcan como una sola marca.</p>
-        </div>
-        <div class="gift-card">
-          <div class="num">03</div>
-          <h3>Buyer persona</h3>
-          <p>Perfil de tu comprador ideal: cómo hablarle, qué contenido consume y cómo convertirlo en venta.</p>
-        </div>
-      </div>
-      <span class="gift-flag">Incluido en el mes 1 · $0</span>
+  <div class="wrap reveal">
+    <div class="chapter-head" style="margin-bottom: 24px;">
+      <span class="chapter-num">00</span>
+      <h2>Regalo de bienvenida</h2>
+      <span class="gift-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <rect x="10" y="28" width="44" height="28" rx="6" fill="#C50022" stroke="#000000" stroke-width="1.8"/>
+          <rect x="10" y="28" width="44" height="7" fill="#000000"/>
+          <rect x="28.5" y="28" width="7" height="28" fill="#000000"/>
+          <g class="gift-lid">
+            <rect x="6" y="18" width="52" height="12" rx="4" fill="#0A0A0A" stroke="#C50022" stroke-width="1.8"/>
+            <path d="M32 18 C 24 6, 12 8, 18 16 C 22 20, 28 19, 32 18Z" fill="#C50022"/>
+            <path d="M32 18 C 40 6, 52 8, 46 16 C 42 20, 36 19, 32 18Z" fill="#C50022"/>
+          </g>
+          <path class="gift-sparkle" d="M32 2l1.6 5.4L39 9l-5.4 1.6L32 16l-1.6-5.4L25 9l5.4-1.6L32 2z" fill="#C50022"/>
+        </svg>
+      </span>
+    </div>
+    <div style="max-width: 640px; margin-bottom: 48px;">
+      <h3 style="font-family: var(--font-display); font-size: clamp(32px, 5vw, 42px); line-height: 0.95; letter-spacing: -0.02em; color: var(--color-text-dark); margin: 0;">
+        La primera impresión define el valor de lo que vendes.
+      </h3>
     </div>
 
-    <!-- Editorial image next to gift items -->
-    <div class="welcome-photo-container">
-      <div class="welcome-photo-offset">
-        <img src="about_model.png" alt="Kreika agency model visual representation">
+    <!-- Bento Grid -->
+    <div class="bento-grid">
+      <!-- Card 1 -->
+      <div class="bento-card">
+        <div class="bento-card-label">01 Renovación</div>
+        <div>
+          <h3>Logotipo</h3>
+          <p>Adaptación moderna y legible, optimizada para Instagram y cabecera web.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 (Image spanning 2 rows) -->
+      <div class="bento-img-card row-span-2">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80" alt="Fashion models representing visual identity" loading="lazy">
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bento-card">
+        <div class="bento-card-label">02 Identidad</div>
+        <div>
+          <h3>Brand Board</h3>
+          <p>Paleta de colores y tipografías corporativas, todo unificado a la perfección.</p>
+        </div>
+      </div>
+
+      <!-- Card 4 (Image) -->
+      <div class="bento-img-card">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80" alt="Fashion moodboard" loading="lazy">
+      </div>
+
+      <!-- Card 5 -->
+      <div class="bento-card bg-dark">
+        <div class="bento-card-label">03 Audiencia</div>
+        <div>
+          <h3>Buyer Persona</h3>
+          <p>Perfil de estructurado de tu comprador ideal: cómo hablarle y cómo venderle.</p>
+        </div>
+      </div>
+
+      <!-- Card 6 (Spans 2 cols, Accent) -->
+      <div class="bento-card bg-accent col-span-2">
+        <div class="bento-card-label">Inversión bonificada</div>
+        <div style="position: relative; z-index: 2;">
+          <h3 style="font-size: 52px; margin-bottom: 8px;">100% Gratis</h3>
+          <p style="color: var(--color-text-dark); max-width: 380px;">Todo el trabajo de identidad visual corporativa está incluido en tu Mes 1 sin costo adicional (regularmente facturado en $1.200 USD).</p>
+        </div>
+        <div class="bento-decorative-circle"></div>
       </div>
     </div>
   </div>
@@ -1028,42 +1213,88 @@ footer .wrap{
         </svg>
       </span>
     </div>
-    <p class="kicker">Shopify e Instagram no son dos frentes separados: son un solo engranaje.</p>
+    <p class="kicker">Integramos todas tus plataformas y creamos un ecosistema digital para darte el control absoluto de tus canales.</p>
 
     <div class="flow">
       <div class="flow-node">
-        <b>Tú envías</b>
-        fotos y datos de los 70 productos del mes
+        <div class="flow-node-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <b>Integración Total</b>
+        Conectamos todas tus plataformas favoritas para crear un canal centralizado de venta y distribución.
       </div>
-      <div class="flow-arrow" aria-hidden="true">&rarr;</div>
-      <div class="flow-node">
-        <b>Se sube</b>
-        a la tienda Shopify, editado y con copy listo
+      <div class="flow-arrow animated-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
       </div>
-      <div class="flow-arrow" aria-hidden="true">&rarr;</div>
       <div class="flow-node">
-        <b>Se programa</b>
-        el contenido de Instagram en paralelo
+        <div class="flow-node-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="9" y1="3" x2="9" y2="21"></line>
+            <line x1="17" y1="9" x2="17" y2="21"></line>
+            <line x1="9" y1="9" x2="21" y2="9"></line>
+          </svg>
+        </div>
+        <b>Control Absoluto</b>
+        Permite monitorear y gestionar todos tus canales de venta a la vez y de forma simultánea.
       </div>
-      <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+      <div class="flow-arrow animated-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </div>
       <div class="flow-node">
-        <b>Cero retrasos</b>
-        una campaña especial mensual acompaña el lanzamiento
+        <div class="flow-node-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <b>En menos de 2 semanas</b>
+        Lanzamos todo tu ecosistema funcionando al 100%. Trabajamos rápido y con máximo detalle.
+      </div>
+      <div class="flow-arrow animated-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </div>
+      <div class="flow-node">
+        <div class="flow-node-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 6l-9.5 9.5-5-5L1 18"></path>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+        </div>
+        <b>Diseñado para crecer</b>
+        Trazamos la arquitectura de operaciones ideal, enfocándonos en acelerar tu marca y tus ventas.
       </div>
     </div>
 
     <div class="auto-grid">
       <div class="auto-card">
+        <div class="auto-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
         <i>Shopify Magic</i>
         <h4>100 respuestas instantáneas</h4>
         <p>El sistema sugiere respuestas automáticas basadas en tus políticas de envío y devoluciones, para que el cliente no espere.</p>
       </div>
       <div class="auto-card">
+        <div class="auto-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div>
         <i>Primer contacto</i>
         <h4>Bienvenida automática</h4>
         <p>Envío automático de un mensaje de bienvenida apenas el cliente abre el chat, para retener su atención desde el segundo uno.</p>
       </div>
       <div class="auto-card">
+        <div class="auto-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg></div>
         <i>Asistente IA</i>
         <h4>Atención 24/7</h4>
         <p>Una IA personalizada e integrada en tus canales, entrenada para guiar la compra, resolver dudas y cerrar ventas a toda hora.</p>
