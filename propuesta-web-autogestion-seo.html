@@ -1128,6 +1128,18 @@ footer .wrap{
         <h3>Presentación Clara & Detallada</h3>
         <p>Organización estratégica de tu oferta de servicios con llamado a la acción directo en cada opción.</p>
       </div>
+
+      <!-- Banner Intro Herramientas Adicionales de Autogestión -->
+      <div class="bento-card col-12" style="background:var(--color-accent-subtle);border:1px solid rgba(197,0,34,0.15);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:260px;">
+          <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--color-accent);">Herramientas adicionales de autogestión que crearemos para ti</span>
+          <h4 style="font-family:var(--font-display);font-size:22px;font-weight:700;text-transform:uppercase;color:var(--color-text-dark);margin:4px 0 0 0;">Automatización y Control Operativo</h4>
+        </div>
+        <div style="font-size:13px;color:var(--color-text-muted);max-width:420px;line-height:1.5;">
+          Desarrollamos e integramos plataformas a la medida de tu flujo de trabajo para que agendes citas, coordines a tu personal y mantengas soporte continuo automáticamente.
+        </div>
+      </div>
+
       <div class="bento-card col-12 bg-accent">
         <div class="bento-card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
@@ -1423,8 +1435,15 @@ document.addEventListener('click', (e) => {
 
 /* TAB SWITCHING */
 function switchWebTab(tab, btn){
-  document.getElementById('web-mes1').style.display = tab === 'mes1' ? 'grid' : 'none';
-  document.getElementById('web-mes2').style.display = tab === 'mes2' ? 'grid' : 'none';
+  const mes1 = document.getElementById('web-mes1');
+  const mes2 = document.getElementById('web-mes2');
+  if (tab === 'mes1') {
+    mes1.style.display = '';
+    mes2.style.display = 'none';
+  } else {
+    mes1.style.display = 'none';
+    mes2.style.display = '';
+  }
   const btns = btn.parentElement.querySelectorAll('button');
   btns.forEach(b => b.classList.remove('active'));
   btn.classList.add('active');

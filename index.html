@@ -826,6 +826,9 @@ img{display:block;max-width:100%;height:auto;}
 @keyframes floatTorchWatermarkMobile {
   0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
   50% { transform: translate(-50%, -53%) rotate(-3deg); }
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 <style>
 /* Unifed Nav Dropdown System */
@@ -1060,7 +1063,12 @@ img{display:block;max-width:100%;height:auto;}
       </div>
       <div class="trust-divider"></div>
       <div class="trust-stat">
-        <div class="trust-stat-num">2</div>
+        <div class="trust-stat-num">Ecosistema</div>
+        <div class="trust-stat-label">Digital Integral</div>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-stat">
+        <div class="trust-stat-num">100%</div>
         <div class="trust-stat-label">Plataformas sincronizadas</div>
       </div>
       <div class="trust-divider"></div>
@@ -1249,6 +1257,29 @@ img{display:block;max-width:100%;height:auto;}
               <div class="demo-val">12 conversaciones hoy</div>
             </div>
             <div class="demo-status ai">24/7</div>
+          </div>
+        </div>
+
+        <!-- Marquee / Slider de Plataformas Integradas -->
+        <div style="margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);overflow:hidden;">
+          <div style="font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.4);margin-bottom:12px;text-align:center;">
+            Tecnologías & Herramientas que Integramos
+          </div>
+          <div class="logo-marquee-track" style="display:flex;align-items:center;gap:24px;width:max-content;animation:marqueeScroll 18s linear infinite;">
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">Shopify</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">Google Cloud & Maps</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">OpenAI / IA</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">Instagram & Meta</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">TikTok Business</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">Adobe Suite</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">LinkedIn Ads</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">Make / Zapier</span>
+            <!-- Repeticion para efecto infinito -->
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">Shopify</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">Google Cloud & Maps</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">OpenAI / IA</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">Instagram & Meta</span>
+            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:6px;">TikTok Business</span>
           </div>
         </div>
       </div>
