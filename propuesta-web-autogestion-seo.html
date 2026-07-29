@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ─────────────────────────────────────────────
-   KREIKA SWISS DESIGN SYSTEM TOKENS (ROUNDED)
+   KREIKA SWISS DESIGN SYSTEM TOKENS
    ───────────────────────────────────────────── */
 :root {
   --color-accent: #C50022;                /* Swiss Strong Red */
@@ -79,7 +79,7 @@ img{display:block;max-width:100%;height:auto;}
   margin-bottom:var(--spacing-16);
 }
 
-/* NAVIGATION */
+/* NAVIGATION (Matching Index & Landing Parity) */
 nav{
   position:fixed;
   top:20px;
@@ -87,14 +87,14 @@ nav{
   transform:translateX(-50%);
   z-index:100;
   width:calc(100% - 40px);
-  max-width:1060px;
-  background:rgba(255, 255, 255, 0.85);
+  max-width:1100px;
+  background:rgba(255, 255, 255, 0.92);
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
   border-radius:var(--radius-nav);
   box-shadow:var(--shadow-nav);
-  border:1px solid rgba(10,10,10,0.05);
-  padding:12px var(--spacing-24);
+  border:1px solid rgba(10,10,10,0.08);
+  padding:10px var(--spacing-20);
 }
 nav .wrap{
   display:flex;
@@ -102,44 +102,20 @@ nav .wrap{
   justify-content:space-between;
   padding:0;
 }
-.brand{
-  display:flex;align-items:center;gap:10px;
-}
-.brand .chip{
-  width:32px;height:32px;
-  background:var(--color-accent);
-  border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  transition:transform var(--dur-ui) var(--ease-ui);
-}
-.brand:hover .chip{
-  transform:rotate(-10deg) scale(1.05);
-}
-.brand .chip svg{width:16px;height:16px;}
-.brand .word{
-  font-family:var(--font-display);
-  font-size:20px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-  color:var(--color-text-dark);
-}
-.navlinks{
-  display:flex;gap:24px;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-muted);
-}
-.navlinks a:hover{
-  color:var(--color-accent);
+.nav-left-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 .nav-back-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: var(--color-bg-base);
   color: var(--color-text-dark);
-  margin-right: 12px;
   border: 1px solid rgba(0,0,0,0.1);
   transition: all var(--dur-ui) var(--ease-ui);
 }
@@ -150,7 +126,58 @@ nav .wrap{
 }
 .nav-back-button svg { width: 16px; height: 16px; }
 
-@media(max-width:767px){.navlinks{display:none;}}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo-chip {
+  width: 32px;
+  height: 32px;
+  background: var(--color-accent);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 3px;
+  flex-shrink: 0;
+}
+.nav-logo-chip img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nav-pill-button {
+  background: var(--color-accent);
+  color: #FFFFFF !important;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 15px rgba(197, 0, 34, 0.25);
+  transition: all var(--dur-ui) var(--ease-ui);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-pill-button:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+}
+
+.navlinks{
+  display:flex;gap:20px;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-muted);
+}
+.navlinks a:hover{
+  color:var(--color-accent);
+}
+
+@media(max-width:991px){.navlinks{display:none;}}
 
 /* HERO */
 .hero{
@@ -213,7 +240,7 @@ nav .wrap{
   max-width:54ch;
 }
 
-/* Swiss Price Tag */
+/* Swiss Price Tag with Red Pill & Antorcha */
 .tag-wrap{
   position:relative;
   display:inline-block;
@@ -234,15 +261,26 @@ nav .wrap{
   0%,100%{transform:rotate(1.5deg);}
   50%{transform:rotate(-1.5deg);}
 }
-.tag .k{
-  font-family:var(--font-mono);
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  color:var(--color-accent);
-  margin-bottom:12px;
+.tag-kicker-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-accent);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 16px;
 }
+.tag-kicker-pill img {
+  width: 14px;
+  height: 14px;
+}
+
 .price-tiers{
   display:flex;align-items:center;justify-content:space-between;
   margin:var(--spacing-16) 0 var(--spacing-8);
@@ -302,7 +340,7 @@ section{
 
 .sec-head{
   margin-bottom:var(--spacing-64);
-  max-width:700px;
+  max-width:750px;
 }
 .sec-head h2{
   font-family:var(--font-display);
@@ -312,6 +350,10 @@ section{
   line-height:1;
   letter-spacing:-0.5px;
   margin-top:var(--spacing-8);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 .sec-head p{
   font-size:16px;
@@ -320,7 +362,48 @@ section{
 }
 .on-red .sec-head p, .on-dark .sec-head p{color:rgba(255,255,255,0.8);}
 
-/* BENTO GRID */
+/* ANIMATED SVG ICONS */
+.spin-gear {
+  width: 36px;
+  height: 36px;
+  animation: spinGear 10s linear infinite;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+@keyframes spinGear {
+  to { transform: rotate(360deg); }
+}
+
+.spin-globe {
+  width: 38px;
+  height: 38px;
+  animation: spinGlobe 12s linear infinite;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+@keyframes spinGlobe {
+  to { transform: rotate(360deg); }
+}
+
+.dollar-anim-group {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: #22c55e;
+  font-family: var(--font-display);
+  font-size: 28px;
+}
+.dollar-icon {
+  animation: floatMoney 2.5s ease-in-out infinite;
+}
+.dollar-icon:nth-child(2) { animation-delay: 0.4s; }
+.dollar-icon:nth-child(3) { animation-delay: 0.8s; }
+@keyframes floatMoney {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-8px) scale(1.15); opacity: 1; text-shadow: 0 0 12px rgba(34,197,94,0.6); }
+}
+
+/* BENTO GRID & CARD SVG ICONS */
 .bento{
   display:grid;
   grid-template-columns:repeat(12,1fr);
@@ -361,6 +444,31 @@ section{
   .col-8,.col-6,.col-4{grid-column:span 12;}
 }
 
+.card-header-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-16);
+  transition: transform var(--dur-ui) var(--ease-ui);
+}
+.bento-card:hover .card-header-icon {
+  transform: scale(1.1) rotate(-4deg);
+}
+.bento-card.bg-dark .card-header-icon {
+  background: rgba(255,255,255,0.1);
+  color: #FFFFFF;
+}
+.bento-card.bg-accent .card-header-icon {
+  background: rgba(255,255,255,0.2);
+  color: #FFFFFF;
+}
+.card-header-icon svg { width: 22px; height: 22px; }
+
 .bento-card i.num{
   font-family:var(--font-mono);
   font-size:11px;
@@ -369,9 +477,10 @@ section{
   text-transform:uppercase;
   color:var(--color-accent);
   display:block;
-  margin-bottom:var(--spacing-16);
+  margin-bottom:var(--spacing-8);
 }
-.bento-card.bg-accent i.num{color:rgba(255,255,255,0.7);}
+.bento-card.bg-accent i.num, .bento-card.bg-dark i.num{color:rgba(255,255,255,0.7);}
+
 .bento-card h3{
   font-family:var(--font-display);
   font-size:24px;
@@ -424,9 +533,26 @@ section{
 .gift-item {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: var(--spacing-20);
+  border-radius: 18px;
+  padding: var(--spacing-24);
+  transition: transform var(--dur-ui) var(--ease-ui);
 }
+.gift-item:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.08);
+}
+.gift-item-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(197,0,34,0.25);
+  color: #FF4D6D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.gift-item-icon svg { width: 20px; height: 20px; }
 .gift-item h4 {
   font-family: var(--font-display);
   font-size: 16px;
@@ -467,7 +593,7 @@ section{
   color:#FFFFFF;
 }
 
-/* METRICS / STATS CARDS */
+/* METRICS CARDS */
 .stat-box{
   background:var(--color-bg-base);
   border:1px solid var(--color-border);
@@ -491,15 +617,18 @@ section{
   margin-top:8px;
 }
 
-/* FLOW NODES (Ecosistema) */
+/* FLOW NODES WITH GLOWING ANIMATED ARROWS (Ecosistema) */
+.flow-grid-wrap {
+  position: relative;
+  margin-top: var(--spacing-48);
+}
 .flow-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:var(--spacing-20);
-  margin-top:var(--spacing-48);
 }
-@media(max-width:767px){
-  .flow-grid{grid-template-columns:1fr;}
+@media(max-width:991px){
+  .flow-grid{grid-template-columns:1fr;gap:var(--spacing-32);}
 }
 .flow-node{
   background:rgba(255,255,255,0.05);
@@ -507,6 +636,12 @@ section{
   border-radius:var(--radius-cards);
   padding:var(--spacing-32);
   position:relative;
+  transition: all var(--dur-ui) var(--ease-ui);
+}
+.flow-node:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.08);
 }
 .flow-node .step{
   font-family:var(--font-mono);
@@ -514,6 +649,18 @@ section{
   color:var(--color-accent);
   text-transform:uppercase;
   margin-bottom:12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.step-arrow-pulse {
+  color: var(--color-accent);
+  font-size: 18px;
+  animation: pulseArrow 1.5s ease-in-out infinite;
+}
+@keyframes pulseArrow {
+  0%, 100% { transform: translateX(0); opacity: 0.6; }
+  50% { transform: translateX(5px); opacity: 1; text-shadow: 0 0 10px var(--color-accent); }
 }
 .flow-node h4{
   font-family:var(--font-display);
@@ -605,6 +752,8 @@ section{
   gap:var(--spacing-16);
   flex-wrap:wrap;
 }
+
+/* WhatsApp Gradient Button (Matching Index Parity) */
 .btn-wa-green {
   display: inline-flex;
   align-items: center;
@@ -626,6 +775,7 @@ section{
   box-shadow: 0 14px 40px rgba(37,211,102,0.45);
   background: linear-gradient(135deg, #2cf476 0%, #20d569 100%);
 }
+
 .footer-cta-watermark {
   position: absolute;
   left: 5%;
@@ -700,20 +850,21 @@ footer .wrap{
 <!-- NAVIGATION -->
 <nav>
   <div class="wrap">
-    <a href="landing.html" class="brand">
-      <div class="nav-back-button" title="Volver al inicio">
+    <div class="nav-left-group">
+      <a href="landing.html" class="nav-back-button" title="Volver al inicio">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
-      </div>
-      <div class="chip">
-        <svg viewBox="0 0 16 16" fill="none">
-          <path d="M8 1v14M1 8h14" stroke="#FFF" stroke-width="2"/>
-        </svg>
-      </div>
-      <span class="word">Kreika</span>
-    </a>
+      </a>
+      <a href="landing.html" class="nav-logo">
+        <div class="nav-logo-chip">
+          <img src="logo_antorcha blanco .svg" alt="Kreika Antorcha">
+        </div>
+        <img src="logo_kreika logotipo negro.svg" alt="Kreika" style="height:26px;width:auto;display:block;">
+      </a>
+    </div>
+
     <div class="navlinks">
       <a href="#welcome">00 Marca</a>
       <a href="#web">01 Web</a>
@@ -723,6 +874,10 @@ footer .wrap{
       <a href="#ecosistema">05 Ecosistema</a>
       <a href="#terminos">06 Términos</a>
     </div>
+
+    <a href="propuesta-web-autogestion-seo.html" class="nav-pill-button">
+      Ecosistema Web + Autogestión
+    </a>
   </div>
 </nav>
 
@@ -745,7 +900,10 @@ footer .wrap{
 
     <div class="tag-wrap">
       <div class="tag">
-        <div class="k">Ecosistema Web + Autogestión</div>
+        <div class="tag-kicker-pill">
+          <img src="logo_antorcha blanco .svg" alt="Kreika Torch">
+          Ecosistema Web + Autogestión
+        </div>
         <div class="price-tiers">
           <div class="price-tier">
             <div class="tier-label">Mes 1 (Setup)</div>
@@ -785,18 +943,30 @@ footer .wrap{
 
       <div class="gift-grid">
         <div class="gift-item">
+          <div class="gift-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
           <h4>Mood Board</h4>
           <p>Dirección estética y paleta cromática de apoyo para imágenes y plataforma.</p>
         </div>
         <div class="gift-item">
+          <div class="gift-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
           <h4>Tono de Comunicación</h4>
           <p>Manual del estilo verbal, respuestas y personalidad para hablar con tus clientes.</p>
         </div>
         <div class="gift-item">
+          <div class="gift-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
           <h4>Buyer Persona</h4>
           <p>Perfilamiento estratégico de tu cliente ideal para dirigir las ofertas exactas.</p>
         </div>
         <div class="gift-item">
+          <div class="gift-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
           <h4>Plantillas Gráficas</h4>
           <p>Formatos editables para redes y web con la imagen uniforme de tu negocio.</p>
         </div>
@@ -810,7 +980,13 @@ footer .wrap{
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">01 · Sitio Web Profesional</span>
-      <h2>Tu centro de operaciones 24/7</h2>
+      <h2>
+        Tu centro de operaciones 24/7
+        <svg class="spin-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </h2>
       <p>Una página web moderna, veloz y optimizada para convertir visitantes en clientes agendados.</p>
     </div>
 
@@ -821,16 +997,25 @@ footer .wrap{
 
     <div id="web-mes1" class="bento">
       <div class="bento-card col-6">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
         <i class="num">01.1 · Arquitectura UX/UI</i>
         <h3>Estructura Orientada a Conversión</h3>
         <p>Diseño responsivo optimizado para móviles donde tus clientes pueden consultar servicios, precios y testimonios al instante.</p>
       </div>
       <div class="bento-card col-6">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
         <i class="num">01.2 · Catálogo de Servicios</i>
         <h3>Presentación Clara & Detallada</h3>
         <p>Organización estratégica de tu oferta de servicios con llamado a la acción directo en cada opción.</p>
       </div>
       <div class="bento-card col-12 bg-accent">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
+        </div>
         <i class="num">01.3 · Integración de Reservas</i>
         <h3>Plataforma de Agendamiento Directo</h3>
         <p>Conectamos tu sitio web con el sistema de reservas para que los clientes elijan fecha, hora y servicio sin intervención manual.</p>
@@ -839,16 +1024,25 @@ footer .wrap{
 
     <div id="web-mes2" class="bento" style="display:none;">
       <div class="bento-card col-4">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
         <i class="num">01.4 · Mantenimiento Técnico</i>
         <h3>Seguridad & Backups</h3>
         <p>Actualizaciones continuas, copias de seguridad semanales y monitoreo de estabilidad 99.9% online.</p>
       </div>
       <div class="bento-card col-4">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
         <i class="num">01.5 · Optimización de Carga</i>
         <h3>Velocidad Ultrarrápida</h3>
         <p>Ajuste de imágenes y caché constante para que la página cargue en menos de 2 segundos en móviles.</p>
       </div>
       <div class="bento-card col-4">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        </div>
         <i class="num">01.6 · Actualizaciones de Contenido</i>
         <h3>Soporte Continuo</h3>
         <p>Cambios de precios, nuevos servicios o ajustes de promociones incluidos cada mes.</p>
@@ -862,22 +1056,38 @@ footer .wrap{
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">02 · Redes Sociales</span>
-      <h2>Generación constante de demanda</h2>
+      <h2>
+        Generación constante de demanda
+        <span class="dollar-anim-group" aria-hidden="true">
+          <span class="dollar-icon">$</span>
+          <span class="dollar-icon">$</span>
+          <span class="dollar-icon">$</span>
+        </span>
+      </h2>
       <p>Mantenemos tus canales digitales activos con contenido profesional que construye confianza y reputación.</p>
     </div>
 
     <div class="bento">
       <div class="bento-card col-4">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
         <div class="stat-num">12–15</div>
         <div class="stat-lbl">Publicaciones / Mes</div>
         <p style="margin-top:16px;text-align:center;">Reels dinámicos y carruseles informativos diseñados para educar y vender.</p>
       </div>
       <div class="bento-card col-4">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
         <div class="stat-num">Stories</div>
         <div class="stat-lbl">Secuencias Diarias</div>
         <p style="margin-top:16px;text-align:center;">Historias enfocadas en testimonios, tras bambalinas y llamados de atención inmediatos.</p>
       </div>
       <div class="bento-card col-4">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
         <div class="stat-num">100%</div>
         <div class="stat-lbl">Calendario Planificado</div>
         <p style="margin-top:16px;text-align:center;">Aprobación previa de publicaciones para mantener alineado el tono de comunicación.</p>
@@ -897,16 +1107,25 @@ footer .wrap{
 
     <div class="bento">
       <div class="bento-card col-4">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
         <i class="num">03.1 · Reservas 24/7</i>
         <h3>Citas Automáticas</h3>
         <p>Tus clientes eligen su horario disponible sin necesidad de cruzar mensajes por horas.</p>
       </div>
       <div class="bento-card col-4">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
         <i class="num">03.2 · Gestión de Personal</i>
         <h3>Asignación de Equipo</h3>
         <p>Panel diseñado para asignar turnos, zonas y clientes a tus colaboradores a medida que contrates personal.</p>
       </div>
       <div class="bento-card col-4">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
         <i class="num">03.3 · Recordatorios Automáticos</i>
         <h3>Cero Ausencias</h3>
         <p>Notificaciones y recordatorios automáticos por WhatsApp y correo para confirmar la asistencia del cliente.</p>
@@ -920,17 +1139,30 @@ footer .wrap{
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">04 · Posicionamiento SEO Local</span>
-      <h2>Dominio en tu mercado geográfico</h2>
+      <h2>
+        Dominio en tu mercado geográfico
+        <svg class="spin-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </h2>
       <p>Aparece exactamente cuando las personas buscan tus servicios en tu ciudad o zona de cobertura.</p>
     </div>
 
     <div class="bento">
       <div class="bento-card col-6 bg-dark">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
         <i class="num" style="color:var(--color-accent);">04.1 · Google Business Profile</i>
         <h3>Ficha de Google Negocio</h3>
         <p>Optimización completa de tu perfil en Google Maps para destacar con reseñas, servicios y ubicación de primero en tu zona.</p>
       </div>
       <div class="bento-card col-6">
+        <div class="card-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
         <i class="num">04.2 · SEO On-Page & Palabras Clave</i>
         <h3>Búsquedas de Alta Intención</h3>
         <p>Configuración de etiquetas y textos en tu web orientados a términos locales que generan contrataciones directas.</p>
@@ -950,26 +1182,40 @@ footer .wrap{
       </p>
     </div>
 
-    <div class="flow-grid">
-      <div class="flow-node">
-        <div class="step">Paso 01</div>
-        <h4>Atracción</h4>
-        <p>Redes sociales y SEO local atraen clientes calificados de tu zona geográfica.</p>
-      </div>
-      <div class="flow-node">
-        <div class="step">Paso 02</div>
-        <h4>Conversión</h4>
-        <p>Tu Web profesional presenta la oferta y facilita la reserva automática de citas 24/7.</p>
-      </div>
-      <div class="flow-node">
-        <div class="step">Paso 03</div>
-        <h4>Autogestión</h4>
-        <p>El sistema notifica al cliente, recuerda la cita y organiza a tu equipo de trabajo.</p>
-      </div>
-      <div class="flow-node">
-        <div class="step">Paso 04</div>
-        <h4>Asesoría Mensual</h4>
-        <p>Acompañamiento estratégico constante para analizar métricas y ajustar metas de crecimiento.</p>
+    <div class="flow-grid-wrap">
+      <div class="flow-grid">
+        <div class="flow-node">
+          <div class="step">
+            Paso 01
+            <span class="step-arrow-pulse">→</span>
+          </div>
+          <h4>Atracción</h4>
+          <p>Redes sociales y SEO local atraen clientes calificados de tu zona geográfica.</p>
+        </div>
+        <div class="flow-node">
+          <div class="step">
+            Paso 02
+            <span class="step-arrow-pulse">→</span>
+          </div>
+          <h4>Conversión</h4>
+          <p>Tu Web profesional presenta la oferta y facilita la reserva automática de citas 24/7.</p>
+        </div>
+        <div class="flow-node">
+          <div class="step">
+            Paso 03
+            <span class="step-arrow-pulse">→</span>
+          </div>
+          <h4>Autogestión</h4>
+          <p>El sistema notifica al cliente, recuerda la cita y organiza a tu equipo de trabajo.</p>
+        </div>
+        <div class="flow-node" style="border-color:var(--color-accent);background:rgba(197,0,34,0.15);">
+          <div class="step" style="color:#FFF;">
+            Paso 04
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+          <h4 style="color:var(--color-accent);">Asesoría Mensual</h4>
+          <p>Acompañamiento estratégico constante con Kreika para analizar métricas y escalar metas de negocio.</p>
+        </div>
       </div>
     </div>
   </div>
