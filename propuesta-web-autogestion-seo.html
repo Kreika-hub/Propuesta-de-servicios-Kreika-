@@ -1034,9 +1034,9 @@ footer .wrap{
 <!-- CHAPTER 01: WEB -->
 <section id="web" class="reveal">
   <div class="wrap">
-    <!-- Banner de Apertura con Imagen Pintura (Full Bleed a ancho completo) -->
-    <div style="width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;height:clamp(160px, 30vw, 260px);overflow:hidden;margin-bottom:var(--spacing-32);">
-      <img src="pintura.png" alt="Kreika Arte & Diseño" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+    <!-- Banner de Apertura con Imagen Pintura (Full Bleed sin recorte) -->
+    <div style="width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;margin-bottom:var(--spacing-32);">
+      <img src="pintura.png" alt="Kreika Arte & Diseño" style="width:100%;height:auto;display:block;">
     </div>
 
     <div class="sec-head">
@@ -1402,22 +1402,17 @@ document.addEventListener('click', (e) => {
 
 /* TAB SWITCHING */
 function switchWebTab(tab, btn){
-  const mes1 = document.getElementById('web-mes1');
-  const mes2 = document.getElementById('web-mes2');
-  if (!mes1 || !mes2) {
-    console.error('Pestañas web-mes1 o web-mes2 no encontradas en el DOM');
-    return;
+  try {
+    const mes1 = document.getElementById('web-mes1');
+    const mes2 = document.getElementById('web-mes2');
+    if (!mes1 || !mes2) { console.error('web-mes1/web-mes2 no encontrados'); return; }
+    if (tab === 'mes1') { mes1.style.display = ''; mes2.style.display = 'none'; }
+    else { mes1.style.display = 'none'; mes2.style.display = ''; }
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  } catch(err) {
+    console.error('Error en switchWebTab:', err);
   }
-  if (tab === 'mes1') {
-    mes1.style.display = '';
-    mes2.style.display = 'none';
-  } else {
-    mes1.style.display = 'none';
-    mes2.style.display = '';
-  }
-  const btns = btn.parentElement.querySelectorAll('button');
-  btns.forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
 }
 
 /* ACCORDION TOGGLE */
